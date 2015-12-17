@@ -18,8 +18,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
-Plugin 'scrooloose/syntastic'
 
+Plugin 'ctrlpvim/ctrlp.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -148,10 +148,10 @@ nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
 
 " Leader {{{
-" let mapleader=","           " leader is comma
+let mapleader=","           " leader is comma
 
 " jk is escape (in insert mode)
-inoremap jk <esc>
+imap jk <Esc> " doesnt work...wtf
 
 " edit vimrc/bash_profile and load vimrc bindings
 nnoremap <leader>ev :e $MYVIMRC<CR>
@@ -214,5 +214,13 @@ if has('nvim')
     nnoremap <A-l> <C-w>l
     nnoremap <A-l> <C-w>l
 endif
+" }}}
+
+" CtrlP {{{
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 'ra'
 " }}}
 
