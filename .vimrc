@@ -18,14 +18,14 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
-
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'scrooloose/nerdcommenter'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
-"
+
 " Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
@@ -44,8 +44,8 @@ let g:airline_powerline_fonts = 0
 " Syntastic integration
 let g:airline#extensions#syntastic#enabled = 1
 " Whitespace errors
-let g:airline#extensions#whitespace#mixed_indent_algo = 0
-let g:airline#extensions#whitespace#checks = ['indent']
+" let g:airline#extensions#whitespace#mixed_indent_algo = 0
+" let g:airline#extensions#whitespace#checks = ['indent']
 let g:airline_theme='solarized'
 " }}}
 
@@ -63,7 +63,7 @@ if has("gui_running")
   set guioptions-=e         " remove gui tabs (ugly)
   set guioptions-=r         " remove right scroll bar
   set guioptions-=L         " remove left scroll bar
-  set t_Co=256              " number of terminal colors
+  set t_Co=256              " number of terminal//  colors
   set guifont=Fira-Mono-Regular:h14
   set linespace=2           " increase line spacing a little
 endif
@@ -75,8 +75,9 @@ set softtabstop=4           " number of spaces inserted/deleted while editing
 set expandtab               " tabs are spaces
 set shiftwidth=4            " an indent is 4 spaces
 set shiftround              " round to nearest multiple of shiftwidth
-set ai                      " auto indent
-
+filetype indent on
+filetype plugin on
+set autoindent              " auto indent
 execute "set listchars=tab:\u2023\u2023"
 set list                    " make tab characters very obvious
 " }}}
@@ -88,11 +89,11 @@ set number                  " show line numbers
 set cursorline              " highlight current line
 
 " make backspace unstupid: erase autoindents, join lines
-set backspace=indent,eol,start
+" set backspace=indent,eol,start
 
 " This turns on filetype detection and loading of langauge-specific indentation
 " files based on that detection. These files live in ~/.vim/indent/
-filetype indent on
+" filetype indent off
 
 set wildmenu                " visual autocomplete for command menu
 set showmatch               " highlight matching [{()}]
@@ -101,7 +102,7 @@ set showmatch               " highlight matching [{()}]
 " nnoremap ; :
 " vnoremap ; :
 
-set paste                   " don't indent pasted text (backwards on nvim)
+" set paste                   " don't indent pasted text (backwards on nvim)
 
 set wrap                    " wrap lines
 set linebreak               " break over-long lines
@@ -135,6 +136,13 @@ map 0 ^
 " highlight last inserted text
 nnoremap gV `[v`]
 
+" move to beginning/end of line
+nnoremap B ^
+nnoremap E $
+
+" $/^ doesn't do anything
+nnoremap $ <nop>
+nnoremap ^ <nop>
 "}}}
 
 " Windows and Tabs {{{
@@ -151,7 +159,7 @@ nmap <C-l> <C-w>l
 let mapleader=","           " leader is comma
 
 " jk is escape (in insert mode)
-imap jk <Esc> " doesnt work...wtf
+inoremap jk <Esc>  " doesnt work...wtf
 
 " edit vimrc/bash_profile and load vimrc bindings
 nnoremap <leader>ev :e $MYVIMRC<CR>
@@ -198,8 +206,10 @@ augroup END
 augroup configgroup
     autocmd!
     autocmd FileType make setlocal noexpandtab
-    autocmd FileType c,h  setlocal tabstop=2 softtabstop=2 expandtab shiftwidth=4
+    autocmd FileType c,h,html,css  setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd BufEnter * setlocal ai
 augroup END
+
 " }}}
 
 " Neovim {{{
@@ -219,7 +229,7 @@ endif
 " CtrlP {{{
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_match_window = 'bottom,order:btt'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 'ra'
 " }}}
