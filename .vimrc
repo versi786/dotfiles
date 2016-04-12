@@ -18,6 +18,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
 " All of your Plugins must be added before the following line
@@ -46,7 +47,7 @@ let g:airline#extensions#syntastic#enabled = 1
 " Whitespace errors
 " let g:airline#extensions#whitespace#mixed_indent_algo = 0
 " let g:airline#extensions#whitespace#checks = ['indent']
-let g:airline_theme='solarized'
+" let g:airline_theme='solarized'
 " }}}
 
 " Syntastic {{{
@@ -54,10 +55,11 @@ let g:airline_theme='solarized'
 
 " Colors and GVim {{{
 syntax enable
-set background=dark
-colorscheme solarized
+" let g:solarized_termcolors=256
 set t_Co=256 "Ignore Gnome terminal color scheme
-
+set background=dark
+" colorscheme solarized
+" colorscheme desert
 if has("gui_running")
   " set guioptions-=T         " remove toolbar
   set guioptions-=e         " remove gui tabs (ugly)
@@ -87,7 +89,8 @@ set list                    " make tab characters very obvious
 set number                  " show line numbers
 "set showcmd                 " show command in bottom bar (hidden by Airline)
 set cursorline              " highlight current line
-
+" hi CursorLine term=bold cterm=bold guibg=Grey40
+hi CursorLine   cterm=NONE ctermbg=16
 " make backspace unstupid: erase autoindents, join lines
 " set backspace=indent,eol,start
 
@@ -159,8 +162,7 @@ nmap <C-l> <C-w>l
 let mapleader=","           " leader is comma
 
 " jk is escape (in insert mode)
-inoremap jk <Esc>  " doesnt work...wtf
-
+inoremap jk <Esc>
 " edit vimrc/bash_profile and load vimrc bindings
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>eb :e ~/.bash_profile<CR>
