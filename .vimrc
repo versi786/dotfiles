@@ -16,11 +16,12 @@ Plugin 'VundleVim/Vundle.vim'
 
 " add plugins after this line
 Plugin 'airblade/vim-gitgutter'
-Plugin 'altercation/vim-colors-solarized'
+" Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'christoomey/vim-tmux-navigator'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -47,7 +48,7 @@ let g:airline#extensions#syntastic#enabled = 1
 " Whitespace errors
 " let g:airline#extensions#whitespace#mixed_indent_algo = 0
 " let g:airline#extensions#whitespace#checks = ['indent']
-" let g:airline_theme='solarized'
+ let g:airline_theme='base16'
 " }}}
 
 " Syntastic {{{
@@ -57,7 +58,7 @@ let g:airline#extensions#syntastic#enabled = 1
 syntax enable
 " let g:solarized_termcolors=256
 set t_Co=256 "Ignore Gnome terminal color scheme
-set background=dark
+" set background=dark
 " colorscheme solarized
 " colorscheme desert
 if has("gui_running")
