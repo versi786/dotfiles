@@ -91,7 +91,7 @@ set number                  " show line numbers
 "set showcmd                 " show command in bottom bar (hidden by Airline)
 set cursorline              " highlight current line
 " hi CursorLine term=bold cterm=bold guibg=Grey40
-hi CursorLine   cterm=NONE ctermbg=16
+" hi CursorLine   cterm=NONE ctermbg=234 " bloomberg color line
 " make backspace unstupid: erase autoindents, join lines
 " set backspace=indent,eol,start
 
@@ -110,7 +110,7 @@ set showmatch               " highlight matching [{()}]
 
 set wrap                    " wrap lines
 set linebreak               " break over-long lines
-set textwidth=80            " enforce 80 characters
+" set textwidth=80            " enforce 80 characters
 
 " kill backups
 " set nobackup
@@ -179,6 +179,7 @@ augroup columnLimit
         " autocmd BufEnter * match OverLength '\%>80v.\+'
     if exists('+colorcolumn')
         set colorcolumn=80
+        " highlight ColorColumn ctermbg=234
     else
         au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
     endif
