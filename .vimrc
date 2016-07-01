@@ -82,6 +82,7 @@ filetype indent on
 filetype plugin on
 set autoindent              " auto indent
 execute "set listchars=tab:\u2023\u2023"
+execute set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 set list                    " make tab characters very obvious
 " }}}
 
