@@ -211,6 +211,8 @@ augroup configgroup
     autocmd FileType make setlocal noexpandtab
     autocmd FileType c,h,html,css  setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     autocmd BufEnter * setlocal ai
+    autocmd BufRead,BufNewFile *.md setlocal colorcolumn=0 filetype=markdown
+    autocmd BufRead,BufNewFile *.txt setlocal colorcolumn=0
 augroup END
 
 " }}}
