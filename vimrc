@@ -16,7 +16,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " add plugins after this line
 Plugin 'airblade/vim-gitgutter'
-" Plugin 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -48,7 +48,7 @@ let g:airline#extensions#syntastic#enabled = 1
 " Whitespace errors
 " let g:airline#extensions#whitespace#mixed_indent_algo = 0
 " let g:airline#extensions#whitespace#checks = ['indent']
- let g:airline_theme='base16'
+" let g:airline_theme='base16'
 " }}}
 
 " Syntastic {{{
@@ -56,10 +56,11 @@ let g:airline#extensions#syntastic#enabled = 1
 
 " Colors and GVim {{{
 syntax enable
-" let g:solarized_termcolors=256
-set t_Co=256 "Ignore Gnome terminal color scheme
-" set background=dark
-" colorscheme solarized
+"let g:solarized_termcolors=256
+set t_Co=16 "Ignore Gnome terminal color scheme
+set term=xterm-256color
+set background=dark
+colorscheme solarized
 " colorscheme desert
 if has("gui_running")
   " set guioptions-=T         " remove toolbar
@@ -81,18 +82,18 @@ set shiftround              " round to nearest multiple of shiftwidth
 filetype indent on
 filetype plugin on
 set autoindent              " auto indent
-execute "set listchars=tab:\u2023\u2023"
-execute set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+"execute "set listchars=tab:\u2023\u2023"
+set listchars=eol:¶,tab:>-,extends:>,precedes:<
 set list                    " make tab characters very obvious
 " }}}
 
 
 " UI Config {{{
 set number                  " show line numbers
-"set showcmd                 " show command in bottom bar (hidden by Airline)
+set showcmd                 " show command in bottom bar (hidden by Airline)
 set cursorline              " highlight current line
 " hi CursorLine term=bold cterm=bold guibg=Grey40
-" hi CursorLine   cterm=NONE ctermbg=234 " bloomberg color line
+"hi CursorLine   cterm=NONE ctermbg=234 " bloomberg color line
 " make backspace unstupid: erase autoindents, join lines
 " set backspace=indent,eol,start
 
@@ -128,6 +129,7 @@ set ffs=unix,dos,mac
 set incsearch " starts seach immediately
 set ignorecase " ignore case of the seach
 set smartcase " except when the first letter is capitalized
+set hlsearch " highlight words that are searched for
 " }}}
 
 " Movement {{{
@@ -212,6 +214,7 @@ augroup configgroup
     autocmd!
     autocmd FileType make setlocal noexpandtab
     autocmd FileType c,h,html,css  setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     autocmd BufEnter * setlocal ai
     autocmd BufRead,BufNewFile *.md setlocal colorcolumn=0 filetype=markdown
     autocmd BufRead,BufNewFile *.txt setlocal colorcolumn=0
