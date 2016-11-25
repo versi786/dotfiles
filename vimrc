@@ -85,7 +85,8 @@ set cursorline              " highlight current line
 "hi CursorLine   cterm=NONE ctermbg=234 " bloomberg color line
 
 set wildmenu                " visual autocomplete for command menu
-"set lazyredraw              " only redraw when we need to
+set path+=**                " get CtrlP functionality without ctrlP
+"set lazyredraw             " only redraw when we need to
 set showmatch               " highlight matching [{()}]
 
 " shift is for losers
@@ -238,7 +239,6 @@ let g:ctrlp_match_window = 'bottom,order:btt'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 'ra'
 
-" set path += "**" " get CtrlP functionality without ctrlP
 " }}}
 
 " nerdTree {{{
