@@ -19,7 +19,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'bling/vim-airline-themes'
-Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'scrooloose/nerdtree'
@@ -85,7 +85,7 @@ set cursorline              " highlight current line
 "hi CursorLine   cterm=NONE ctermbg=234 " bloomberg color line
 
 set wildmenu                " visual autocomplete for command menu
-set path+=**                " get CtrlP functionality without ctrlP
+"set path+=**                " seach down into sub folders for file tasks
 "set lazyredraw             " only redraw when we need to
 set showmatch               " highlight matching [{()}]
 
