@@ -18,17 +18,20 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plugin 'bling/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'scrooloose/nerdtree'
+
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 
-" Brief help
+" Brief hel/
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
@@ -45,32 +48,16 @@ set noshowmode              " Airline does this for us
 let g:airline_powerline_fonts = 0
 " Syntastic integration
 let g:airline#extensions#syntastic#enabled = 1
-" Whitespace errors
-" let g:airline#extensions#whitespace#mixed_indent_algo = 0
-" let g:airline#extensions#whitespace#checks = ['indent']
-" let g:airline_theme='base16'
-" }}}
-
-" Syntastic {{{
 " }}}
 
 " Colors and GVim {{{
+
 syntax enable
-"let g:solarized_termcolors=256
-set t_Co=16 "Ignore Gnome terminal color scheme
+"set t_Co=256
 set term=xterm-256color
 set background=dark
 colorscheme solarized
-" colorscheme desert
-if has("gui_running")
-  " set guioptions-=T         " remove toolbar
-  set guioptions-=e         " remove gui tabs (ugly)
-  set guioptions-=r         " remove right scroll bar
-  set guioptions-=L         " remove left scroll bar
-  set t_Co=256              " number of terminal//  colors
-  set guifont=Fira-Mono-Regular:h14
-  set linespace=2           " increase line spacing a little
-endif
+
 " }}}
 
 " spaces and tabs {{{
@@ -85,6 +72,8 @@ set autoindent              " auto indent
 "execute "set listchars=tab:\u2023\u2023"
 set listchars=eol:¶,tab:>-,extends:>,precedes:<
 set list                    " make tab characters very obvious
+" make backspace unstupid: erase autoindents, join lines
+set backspace=indent,eol,start
 " }}}
 
 
@@ -94,24 +83,18 @@ set showcmd                 " show command in bottom bar (hidden by Airline)
 set cursorline              " highlight current line
 " hi CursorLine term=bold cterm=bold guibg=Grey40
 "hi CursorLine   cterm=NONE ctermbg=234 " bloomberg color line
-" make backspace unstupid: erase autoindents, join lines
-" set backspace=indent,eol,start
-
-" This turns on filetype detection and loading of langauge-specific indentation
-" files based on that detection. These files live in ~/.vim/indent/
-" filetype indent off
 
 set wildmenu                " visual autocomplete for command menu
+"set lazyredraw              " only redraw when we need to
 set showmatch               " highlight matching [{()}]
 
 " shift is for losers
-" nnoremap ; :
-" vnoremap ; :
+nnoremap ; :
+vnoremap ; :
 
 " set paste                   " don't indent pasted text (backwards on nvim)
-
-set wrap                    " wrap lines
-set linebreak               " break over-long lines
+set wrap                      " wrap lines
+set linebreak                 " break over-long lines
 " set textwidth=80            " enforce 80 characters
 
 " kill backups
@@ -130,6 +113,7 @@ set incsearch " starts seach immediately
 set ignorecase " ignore case of the seach
 set smartcase " except when the first letter is capitalized
 set hlsearch " highlight words that are searched for
+nnoremap <leader>q :nohlsearch<CR> " clear search
 " }}}
 
 " Movement {{{
@@ -162,11 +146,39 @@ nmap <C-k> <C-w>k
 nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
 
+" }}}
+
+" BUffers {{{
+
+" This allows buffers to be hidden if you've modified a buffer.
+" This is almost a must if you wish to use buffers in this way.
+set hidden
+
+" To open a new empty buffer
+" This replaces :tabnew which I used to bind to this mapping
+nmap <leader>T :enew<cr>
+
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>bq :bp <BAR> bd #<CR>
+
+" Show all open buffers and their status
+nmap <leader>bl :ls<CR>
+
+" }}}
+
 " Leader {{{
 let mapleader=","           " leader is comma
 
 " jk is escape (in insert mode)
 inoremap jk <Esc>
+
 " edit vimrc/bash_profile and load vimrc bindings
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>eb :e ~/.bash_profile<CR>
@@ -178,8 +190,6 @@ nnoremap <leader>s :mksession<CR>
 
 " Autogroups {{{
 augroup columnLimit
-        " autocmd BufEnter * highlight OverLength ctermbg=darkgrey guibg=#404040
-        " autocmd BufEnter * match OverLength '\%>80v.\+'
     if exists('+colorcolumn')
         set colorcolumn=80
         " highlight ColorColumn ctermbg=234
@@ -215,25 +225,10 @@ augroup configgroup
     autocmd FileType make setlocal noexpandtab
     autocmd FileType c,h,html,css  setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     autocmd FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-    autocmd BufEnter * setlocal ai
     autocmd BufRead,BufNewFile *.md setlocal colorcolumn=0 filetype=markdown
     autocmd BufRead,BufNewFile *.txt setlocal colorcolumn=0
 augroup END
 
-" }}}
-
-" Neovim {{{
-if has('nvim')
-    tnoremap <A-h> <C-\><C-n><C-w>h
-    tnoremap <A-j> <C-\><C-n><C-w>j
-    tnoremap <A-k> <C-\><C-n><C-w>k
-    tnoremap <A-h> <C-\><C-n><C-w>h
-
-    nnoremap <A-j> <C-w>j
-    nnoremap <A-k> <C-w>k
-    nnoremap <A-l> <C-w>l
-    nnoremap <A-l> <C-w>l
-endif
 " }}}
 
 " CtrlP {{{
@@ -242,5 +237,9 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_match_window = 'bottom,order:btt'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 'ra'
+
+" set path += "**" " get CtrlP functionality without ctrlP
 " }}}
 
+" nerdTree {{{
+nmap <silent> <leader>f :NERDTreeToggle<cr>
