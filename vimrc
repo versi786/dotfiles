@@ -19,7 +19,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'bling/vim-airline-themes'
-"Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'scrooloose/nerdtree'
@@ -243,3 +243,4 @@ let g:ctrlp_working_path_mode = 'ra'
 
 " nerdTree {{{
 nmap <silent> <leader>f :NERDTreeToggle<cr>
+}}}
