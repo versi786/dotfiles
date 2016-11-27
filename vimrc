@@ -149,32 +149,7 @@ nmap <C-l> <C-w>l
 
 " }}}
 
-" BUffers {{{
-
-" This allows buffers to be hidden if you've modified a buffer.
-" This is almost a must if you wish to use buffers in this way.
-set hidden
-
-" To open a new empty buffer
-" This replaces :tabnew which I used to bind to this mapping
-nmap <leader>T :enew<cr>
-
-" Move to the next buffer
-nmap <leader>l :bnext<CR>
-
-" Move to the previous buffer
-nmap <leader>h :bprevious<CR>
-
-" Close the current buffer and move to the previous one
-" This replicates the idea of closing a tab
-nmap <leader>bq :bp <BAR> bd #<CR>
-
-" Show all open buffers and their status
-nmap <leader>bl :ls<CR>
-
-" }}}
-
-" Leader {{{
+" Shortucts {{{
 let mapleader=","           " leader is comma
 
 " jk is escape (in insert mode)
@@ -187,6 +162,41 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " save session, reload with vim -S
 nnoremap <leader>s :mksession<CR>
+" }}}
+
+"" Buffers {{{
+
+"" This allows buffers to be hidden if you've modified a buffer.
+"" This is almost a must if you wish to use buffers in this way.
+"set hidden
+
+"" To open a new empty buffer
+"" This replaces :tabnew which I used to bind to this mapping
+"nmap <leader>T :enew<cr>
+
+"" Move to the next buffer
+"nmap <leader>l :bnext<CR>
+
+"" Move to the previous buffer
+"nmap <leader>h :bprevious<CR>
+
+"" Close the current buffer and move to the previous one
+"" This replicates the idea of closing a tab
+"nmap <leader>bq :bp <BAR> bd #<CR>
+
+"" Show all open buffers and their status
+"nmap <leader>bl :ls<CR>
+
+"" }}}
+
+" Tabs {{{
+for tab_number in [1,2,3,4, 5, 6]
+      execute 'noremap <leader>' . tab_number . ' :tabnext ' . tab_number . '<cr>'
+endfor
+
+noremap <leader>nt :tabnew<cr>
+noremap <leader>tn :tabnext<cr>
+nnoremap <leader>ct :tabclose<cr>
 " }}}
 
 " Autogroups {{{
@@ -243,4 +253,4 @@ let g:ctrlp_working_path_mode = 'ra'
 
 " nerdTree {{{
 nmap <silent> <leader>f :NERDTreeToggle<cr>
-}}}
+" }}}
