@@ -41,6 +41,10 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 " }}}
 
+" Leader {{{
+let mapleader=","           " leader is comma
+" }}}
+
 " Airline {{{
 set laststatus=2            " show whole status bar
 set noshowmode              " Airline does this for us
@@ -61,6 +65,7 @@ colorscheme solarized
 " }}}
 
 " spaces and tabs {{{
+
 set tabstop=4               " number of visual spaces per TAB
 set softtabstop=4           " number of spaces inserted/deleted while editing
 set expandtab               " tabs are spaces
@@ -69,7 +74,8 @@ set shiftround              " round to nearest multiple of shiftwidth
 filetype indent on
 filetype plugin on
 set autoindent              " auto indent
-"execute "set listchars=tab:\u2023\u2023"
+set smartindent             " smart indent
+
 set listchars=eol:¶,tab:>-,extends:>,precedes:<
 set list                    " make tab characters very obvious
 " make backspace unstupid: erase autoindents, join lines
@@ -85,7 +91,8 @@ set cursorline              " highlight current line
 "hi CursorLine   cterm=NONE ctermbg=234 " bloomberg color line
 
 set wildmenu                " visual autocomplete for command menu
-"set path+=**                " seach down into sub folders for file tasks
+set path+=**                " seach down into sub folders for file tasks
+                            " use :find to search
 "set lazyredraw             " only redraw when we need to
 set showmatch               " highlight matching [{()}]
 
@@ -93,7 +100,6 @@ set showmatch               " highlight matching [{()}]
 nnoremap ; :
 vnoremap ; :
 
-" set paste                   " don't indent pasted text (backwards on nvim)
 set wrap                      " wrap lines
 set linebreak                 " break over-long lines
 " set textwidth=80            " enforce 80 characters
@@ -115,6 +121,37 @@ set ignorecase " ignore case of the seach
 set smartcase " except when the first letter is capitalized
 set hlsearch " highlight words that are searched for
 nnoremap <leader>q :nohlsearch<CR> " clear search
+" }}}
+
+" vimgrep and cope {{{
+" from: http://amix.dk/vim/vimrc.html
+" had to make some changes though
+
+" When you press gv you vimgrep after the selected text
+vnoremap <silent> gv :call VisualSelection('gv')<CR>
+
+" Open vimgrep and put the cursor in the right position
+map <leader>g :vimgrep // **/*<left><left><left><left><left><left>
+
+" Vimgreps in the current file
+map <leader><space> :vimgrep // <C-R>%<C-B><right><right><right><right><right><right><right><right><right>
+" When you press <leader>r you can search and replace the selected text
+vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
+
+" Do :help cope if you are unsure what cope is. It's super useful!
+"
+" When you search with vimgrep, display your results in cope by doing:
+"   <leader>cc
+"
+" To go to the next search result do:
+"   <leader>n
+"
+" To go to the previous search results do:
+"   <leader>p
+"
+map <leader>cc :botright cope<cr>
+map <leader>n :cn<cr>
+map <leader>p :cp<cr>
 " }}}
 
 " Movement {{{
@@ -150,7 +187,6 @@ nmap <C-l> <C-w>l
 " }}}
 
 " Shortucts {{{
-let mapleader=","           " leader is comma
 
 " jk is escape (in insert mode)
 inoremap jk <Esc>
@@ -158,6 +194,7 @@ inoremap jk <Esc>
 " edit vimrc/bash_profile and load vimrc bindings
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>eb :e ~/.bash_profile<CR>
+nnoremap <leader>et :e ~/.tmux.conf<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " save session, reload with vim -S
@@ -195,7 +232,7 @@ for tab_number in [1,2,3,4, 5, 6]
 endfor
 
 noremap <leader>nt :tabnew<cr>
-noremap <leader>tn :tabnext<cr>
+noremap <leader>t :tabnext<cr>
 nnoremap <leader>ct :tabclose<cr>
 " }}}
 
@@ -236,6 +273,7 @@ augroup configgroup
     autocmd FileType make setlocal noexpandtab
     autocmd FileType c,h,html,css  setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     autocmd FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd FileType verilog setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     autocmd BufRead,BufNewFile *.md setlocal colorcolumn=0 filetype=markdown
     autocmd BufRead,BufNewFile *.txt setlocal colorcolumn=0
 augroup END
@@ -254,3 +292,35 @@ let g:ctrlp_working_path_mode = 'ra'
 " nerdTree {{{
 nmap <silent> <leader>f :NERDTreeToggle<cr>
 " }}}
+
+
+" helperFunctions {{{
+function! CmdLine(str)
+    exe "menu Foo.Bar :" . a:str
+    emenu Foo.Bar
+    unmenu Foo
+endfunction
+
+function! VisualSelection(direction) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'b'
+        execute "normal ?" . l:pattern . "^M"
+    elseif a:direction == 'gv'
+        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*')
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    elseif a:direction == 'f'
+        execute "normal /" . l:pattern . "^M"
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+" }}}
+
