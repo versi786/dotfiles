@@ -20,9 +20,10 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'bling/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdcommenter'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
+Plugin 'Syntastic'
 
 
 " All of your Plugins must be added before the following line
@@ -54,14 +55,23 @@ let g:airline_powerline_fonts = 0
 let g:airline#extensions#syntastic#enabled = 1
 " }}}
 
-" Colors and GVim {{{
+" Syntastic {{{
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+" }}}
+
+" Colors and GVim {{{
 syntax enable
 "set t_Co=256
 set term=xterm-256color
 set background=dark
 colorscheme solarized
-
 " }}}
 
 " spaces and tabs {{{
