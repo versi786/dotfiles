@@ -17,13 +17,19 @@ Plugin 'VundleVim/Vundle.vim'
 " add plugins after this line
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
-Plugin 'bling/vim-airline-themes'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'joshdick/onedark.vim'
+Plugin 'morhetz/gruvbox'
+Plugin 'mxw/vim-jsx'
+Plugin 'nbouscal/vim-stylish-haskell'
+Plugin 'pangloss/vim-javascript'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Syntastic'
+"Plugin 'sheerun/vim-polyglot'
+Plugin 'vim-syntastic/syntastic'
 
 
 " All of your Plugins must be added before the following line
@@ -64,14 +70,41 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_style_warning_symbol = '💩'
+
+" javascript
+let g:syntastic_javascript_checkers = ['eslint']
+
 " }}}
 
 " Colors and GVim {{{
 syntax enable
-"set t_Co=256
-set term=xterm-256color
-set background=dark
-colorscheme solarized
+
+"set term=xterm-256color
+
+    " Solarized Settings {{{
+    "set t_Co=256
+    "set term=xterm-256color
+    "set background=dark
+    "colorscheme solarized
+    " }}}
+
+    " One Dark Settings {{{
+    syntax on
+    colorscheme onedark
+    let g:airline_theme='onedark'
+    " }}}
+
+    " gruvbox {{{
+    "colorscheme gruvbox
+    "set background=dark
+    " }}}
+
+
 " }}}
 
 " spaces and tabs {{{
@@ -97,7 +130,7 @@ set backspace=indent,eol,start
 set number                  " show line numbers
 set showcmd                 " show command in bottom bar (hidden by Airline)
 set cursorline              " highlight current line
-" hi CursorLine term=bold cterm=bold guibg=Grey40
+"hi CursorLine term=bold cterm=bold guibg=Grey40
 "hi CursorLine   cterm=NONE ctermbg=234 " bloomberg color line
 
 set wildmenu                " visual autocomplete for command menu
@@ -284,6 +317,7 @@ augroup configgroup
     autocmd FileType c,h,html,css  setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     autocmd FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     autocmd FileType verilog setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd FileType haskell setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
     autocmd BufRead,BufNewFile *.md setlocal colorcolumn=0 filetype=markdown
     autocmd BufRead,BufNewFile *.txt setlocal colorcolumn=0
 augroup END
@@ -304,7 +338,7 @@ nmap <silent> <leader>f :NERDTreeToggle<cr>
 " }}}
 
 
-" helperFunctions {{{
+" helperFunctions for vimgrep {{{
 function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
     emenu Foo.Bar
