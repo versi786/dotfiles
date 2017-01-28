@@ -16,12 +16,13 @@ Plugin 'VundleVim/Vundle.vim'
 
 " add plugins after this line
 Plugin 'airblade/vim-gitgutter'
-Plugin 'altercation/vim-colors-solarized'
+"Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'joshdick/onedark.vim'
+Plugin 'lifepillar/vim-solarized8'
 Plugin 'morhetz/gruvbox'
 Plugin 'mxw/vim-jsx'
 Plugin 'nbouscal/vim-stylish-haskell'
@@ -29,6 +30,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 "Plugin 'sheerun/vim-polyglot'
+Plugin 'urso/haskell_syntax.vim'
 Plugin 'vim-syntastic/syntastic'
 
 
@@ -70,6 +72,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_loc_list_height=3
 
 let g:syntastic_error_symbol = '❌'
 let g:syntastic_warning_symbol = "⚠"
@@ -82,19 +85,18 @@ let g:syntastic_javascript_checkers = ['eslint']
 " }}}
 
 " Colors and GVim {{{
-syntax enable
+" set Vim-specific sequences for RGB colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
 
-"set term=xterm-256color
-
+syntax on
     " Solarized Settings {{{
-    "set t_Co=256
-    "set term=xterm-256color
+    "colorscheme solarized8_dark
     "set background=dark
-    "colorscheme solarized
     " }}}
 
     " One Dark Settings {{{
-    syntax on
     colorscheme onedark
     let g:airline_theme='onedark'
     " }}}
