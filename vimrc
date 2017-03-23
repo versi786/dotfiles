@@ -16,7 +16,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 " add plugins after this line
 Plugin 'airblade/vim-gitgutter'
-"Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -29,10 +28,10 @@ Plugin 'nbouscal/vim-stylish-haskell'
 Plugin 'pangloss/vim-javascript'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-"Plugin 'sheerun/vim-polyglot'
 Plugin 'urso/haskell_syntax.vim'
 Plugin 'vim-syntastic/syntastic'
 
+Plugin 'sjl/badwolf'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -40,7 +39,7 @@ filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 
-" Brief hel/
+" Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
@@ -82,6 +81,17 @@ let g:syntastic_style_warning_symbol = '💩'
 " javascript
 let g:syntastic_javascript_checkers = ['eslint']
 
+" verilog
+let g:syntastic_verilog_include_dirs = ['src', 'src/include', 'include']
+
+" asm
+let g:syntastic_ignore_files=['asm'] " ignore asm files
+
+
+"shortucts
+map <leader>sn :lnext<cr>
+map <leader>sp :lprev<cr>
+
 " }}}
 
 " Colors and GVim {{{
@@ -92,13 +102,14 @@ set termguicolors
 
 syntax on
     " Solarized Settings {{{
-    "colorscheme solarized8_dark
+    colorscheme solarized8_dark
+    let g:airline_theme='solarized'
     "set background=dark
     " }}}
 
     " One Dark Settings {{{
-    colorscheme onedark
-    let g:airline_theme='onedark'
+    "colorscheme onedark
+    "let g:airline_theme='onedark'
     " }}}
 
     " gruvbox {{{
@@ -321,7 +332,7 @@ augroup configgroup
     autocmd FileType verilog setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     autocmd FileType haskell setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
     autocmd BufRead,BufNewFile *.md setlocal colorcolumn=0 filetype=markdown
-    autocmd BufRead,BufNewFile *.txt setlocal colorcolumn=0
+    autocmd BufRead,BufNewFile *.txt setlocal colorcolumn=0 tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 augroup END
 
 " }}}
@@ -337,6 +348,14 @@ let g:ctrlp_working_path_mode = 'ra'
 
 " nerdTree {{{
 nmap <silent> <leader>f :NERDTreeToggle<cr>
+" }}}
+
+" Backups {{{
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupskip=/tmp/*,/private/tmp/*
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set writebackup
 " }}}
 
 
@@ -368,5 +387,14 @@ function! VisualSelection(direction) range
     let @" = l:saved_reg
 endfunction
 
+" }}}
+
+" haskell {{{
+map <leader>h :%!stylish-haskell<cr>
+" }}}
+
+" NerdCommenter {{{
+let g:NERDAltDelims_haskell = 1
+let g:NERDAltDelims_lhaskell = 1
 " }}}
 
