@@ -1,6 +1,8 @@
 " Aasif Versi's .vimrc
 " http://dougblack.io/words/a-good-vimrc.html
 
+" dpkg -r vim -- to remove vim, why would you ever do this though
+
 " Vundle {{{
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -20,9 +22,6 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'joshdick/onedark.vim'
-Plugin 'lifepillar/vim-solarized8'
-Plugin 'morhetz/gruvbox'
 Plugin 'mxw/vim-jsx'
 Plugin 'nbouscal/vim-stylish-haskell'
 Plugin 'pangloss/vim-javascript'
@@ -31,7 +30,10 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'urso/haskell_syntax.vim'
 Plugin 'vim-syntastic/syntastic'
 
+" True color colorschemes
 Plugin 'sjl/badwolf'
+Plugin 'joshdick/onedark.vim'
+Plugin 'lifepillar/vim-solarized8'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -57,7 +59,7 @@ let mapleader=","           " leader is comma
 set laststatus=2            " show whole status bar
 set noshowmode              " Airline does this for us
 " use powerline fonts
-let g:airline_powerline_fonts = 0
+let g:airline_powerline_fonts = 1
 " Syntastic integration
 let g:airline#extensions#syntastic#enabled = 1
 " }}}
@@ -68,10 +70,10 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_loc_list_height=3
+let g:syntastic_loc_list_height=1
 
 let g:syntastic_error_symbol = '❌'
 let g:syntastic_warning_symbol = "⚠"
@@ -102,8 +104,8 @@ set termguicolors
 
 syntax on
     " Solarized Settings {{{
-    colorscheme solarized8_dark
-    let g:airline_theme='solarized'
+    "colorscheme solarized8_dark
+    "let g:airline_theme='solarized'
     "set background=dark
     " }}}
 
@@ -115,6 +117,11 @@ syntax on
     " gruvbox {{{
     "colorscheme gruvbox
     "set background=dark
+    " }}}
+
+    " badwolf {{{
+    colorscheme badwolf
+    let g:airline_theme='badwolf'
     " }}}
 
 
@@ -398,3 +405,10 @@ let g:NERDAltDelims_haskell = 1
 let g:NERDAltDelims_lhaskell = 1
 " }}}
 
+
+" Nerd Fonts {{{
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_enable_airline_statusline = 1
+let g:webdevicons_enable_ctrlp = 1
+" }}}
