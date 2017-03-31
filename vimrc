@@ -30,10 +30,15 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'urso/haskell_syntax.vim'
 Plugin 'vim-syntastic/syntastic'
 
+
 " True color colorschemes
 Plugin 'sjl/badwolf'
 Plugin 'joshdick/onedark.vim'
 Plugin 'lifepillar/vim-solarized8'
+Plugin 'morhetz/gruvbox'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'crusoexia/vim-monokai'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -106,7 +111,6 @@ syntax on
     " Solarized Settings {{{
     "colorscheme solarized8_dark
     "let g:airline_theme='solarized'
-    "set background=dark
     " }}}
 
     " One Dark Settings {{{
@@ -120,9 +124,22 @@ syntax on
     " }}}
 
     " badwolf {{{
-    colorscheme badwolf
-    let g:airline_theme='badwolf'
+    "colorscheme badwolf
+    "let g:airline_theme='badwolf'
     " }}}
+
+    " base16 {{{
+    "colorscheme base16-default-dark
+    " }}}
+
+    " jellybeans {{{
+    colorscheme jellybeans
+    " }}}
+
+    " monokai {{{
+    colorscheme monokai
+    " }}}
+
 
 
 " }}}
