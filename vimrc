@@ -1,6 +1,7 @@
 " Aasif Versi's .vimrc
 " http://dougblack.io/words/a-good-vimrc.html
 
+" using checkinstall https://help.ubuntu.com/community/CheckInstalet
 " dpkg -r vim -- to remove vim, why would you ever do this though
 
 " Vundle {{{
@@ -29,6 +30,9 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'urso/haskell_syntax.vim'
 Plugin 'vim-syntastic/syntastic'
+Plugin 'benmills/vimux'
+Plugin 'editorconfig/editorconfig-vim'
+
 
 
 " True color colorschemes
@@ -114,8 +118,8 @@ syntax on
     " }}}
 
     " One Dark Settings {{{
-    "colorscheme onedark
-    "let g:airline_theme='onedark'
+    colorscheme onedark
+    let g:airline_theme='onedark'
     " }}}
 
     " gruvbox {{{
@@ -133,11 +137,11 @@ syntax on
     " }}}
 
     " jellybeans {{{
-    colorscheme jellybeans
+    "colorscheme jellybeans
     " }}}
 
     " monokai {{{
-    colorscheme monokai
+    "colorscheme monokai
     " }}}
 
 
@@ -239,9 +243,6 @@ map <leader>p :cp<cr>
 nnoremap j gj
 nnoremap k gk
 
-" beginning of line = beginning of text
-map 0 ^
-
 " highlight last inserted text
 nnoremap gV `[v`]
 
@@ -249,14 +250,10 @@ nnoremap gV `[v`]
 nnoremap B ^
 nnoremap E $
 
-" $/^ doesn't do anything
-nnoremap $ <nop>
-nnoremap ^ <nop>
-"}}}
-
 " Windows and Tabs {{{
 set splitbelow              " new hoz splits go below
 set splitright              " new vrt splits go right
+nnoremap <silent> vv :vsp<CR>
 
 " move between windows sensibly
 nmap <C-j> <C-w>j
@@ -428,4 +425,11 @@ let g:webdevicons_enable = 1
 let g:webdevicons_enable_nerdtree = 1
 let g:webdevicons_enable_airline_statusline = 1
 let g:webdevicons_enable_ctrlp = 1
+" }}}
+
+" vimux {{{
+map <Leader>vp :VimuxPromptCommand<CR>
+map <Leader>vl :VimuxRunLastCommand<CR>
+map <Leader>vi :VimuxInspectRunner<CR>
+map <Leader>vz :VimuxZoomRunner<CR>
 " }}}
