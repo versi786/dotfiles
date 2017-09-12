@@ -433,3 +433,7 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 map <Leader>vi :VimuxInspectRunner<CR>
 map <Leader>vz :VimuxZoomRunner<CR>
 " }}}
+
+" vim-jsx {{{
+let g:jsx_ext_required = 0
+" }}}
