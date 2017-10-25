@@ -174,6 +174,7 @@ set cursorline              " highlight current line
 "hi CursorLine   cterm=NONE ctermbg=234 " bloomberg color line
 
 set wildmenu                " visual autocomplete for command menu
+set wildmode=longest,list                " bash-like tab completion
 set path+=**                " seach down into sub folders for file tasks
                             " use :find to search
 "set lazyredraw             " only redraw when we need to
