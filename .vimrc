@@ -17,6 +17,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " add plugins after this line
 Plugin 'airblade/vim-gitgutter'
+Plugin 'alvan/vim-closetag'
 Plugin 'benmills/vimux'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'editorconfig/editorconfig-vim'
@@ -405,6 +406,44 @@ nmap <leader>w :Ack! "\b<cword>\b"<CR>
 " }}}
 
 " Ale {{{
+
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
+" After this is configured, :ALEFix will try and fix your JS code with ESLint.
+let g:ale_fixers = { 'javascript': ['eslint'] }
+
+" Set this setting in vimrc if you want to fix files automatically on save.
+" This is off by default.
+let g:ale_fix_on_save = 1
+
+let g:ale_completion_enabled = 1
+
+" }}}
+
+" closetag {{{
+" filenames like *.xml, *.html, *.xhtml, ...
+" Then after you press <kbd>&gt;</kbd> in these files, this plugin will try to close the current tag.
+"
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non closing tags self closing in the specified files.
+"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+
+" integer value [0|1]
+" This will make the list of non closing tags case sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+"
+let g:closetag_emptyTags_caseSensitive = 1
+
+" Shortcut for closing tags, default is '>'
+"
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is ''
+"
+let g:closetag_close_shortcut = '<leader>>'
 " }}}
