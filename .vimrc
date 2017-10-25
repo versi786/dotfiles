@@ -1,5 +1,3 @@
-" Aasif Versi's .vimrc
-" http://dougblack.io/words/a-good-vimrc.html
 
 " using checkinstall https://help.ubuntu.com/community/CheckInstalet
 " dpkg -r vim -- to remove vim, why would you ever do this though
@@ -19,21 +17,20 @@ Plugin 'VundleVim/Vundle.vim'
 
 " add plugins after this line
 Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'benmills/vimux'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'mxw/vim-jsx'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'junegunn/fzf.vim'
 Plugin 'nbouscal/vim-stylish-haskell'
+Plugin 'mileszs/ack.vim'
+Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'urso/haskell_syntax.vim'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'benmills/vimux'
-Plugin 'editorconfig/editorconfig-vim'
-
-
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'w0rp/ale'
 
 " True color colorschemes
 Plugin 'sjl/badwolf'
@@ -43,6 +40,10 @@ Plugin 'morhetz/gruvbox'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'crusoexia/vim-monokai'
 
+" Graveyard
+" Plugin 'vim-syntastic/syntastic'
+" Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'Yggdroot/indentLine'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -106,10 +107,7 @@ map <leader>sp :lprev<cr>
 " }}}
 
 " Colors and GVim {{{
-" set Vim-specific sequences for RGB colors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-set termguicolors
+"set termguicolors
 
 syntax on
     " Solarized Settings {{{
@@ -120,6 +118,7 @@ syntax on
     " One Dark Settings {{{
     colorscheme onedark
     let g:airline_theme='onedark'
+    set t_ut= " force redraw of background color, different from terminal background
     " }}}
 
     " gruvbox {{{
@@ -162,10 +161,10 @@ set smartindent             " smart indent
 
 set listchars=eol:¶,tab:>-,extends:>,precedes:<
 set list                    " make tab characters very obvious
+set conceallevel=0
 " make backspace unstupid: erase autoindents, join lines
 set backspace=indent,eol,start
 " }}}
-
 
 " UI Config {{{
 set number                  " show line numbers
@@ -207,37 +206,6 @@ set hlsearch " highlight words that are searched for
 nnoremap <leader>q :nohlsearch<CR> " clear search
 " }}}
 
-" vimgrep and cope {{{
-" from: http://amix.dk/vim/vimrc.html
-" had to make some changes though
-
-" When you press gv you vimgrep after the selected text
-vnoremap <silent> gv :call VisualSelection('gv')<CR>
-
-" Open vimgrep and put the cursor in the right position
-map <leader>g :vimgrep // **/*<left><left><left><left><left><left>
-
-" Vimgreps in the current file
-map <leader><space> :vimgrep // <C-R>%<C-B><right><right><right><right><right><right><right><right><right>
-" When you press <leader>r you can search and replace the selected text
-vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
-
-" Do :help cope if you are unsure what cope is. It's super useful!
-"
-" When you search with vimgrep, display your results in cope by doing:
-"   <leader>cc
-"
-" To go to the next search result do:
-"   <leader>n
-"
-" To go to the previous search results do:
-"   <leader>p
-"
-map <leader>cc :botright cope<cr>
-map <leader>n :cn<cr>
-map <leader>p :cp<cr>
-" }}}
-
 " Movement {{{
 " move vertically by visual line (not line number)
 nnoremap j gj
@@ -249,6 +217,7 @@ nnoremap gV `[v`]
 " move to beginning/end of line
 nnoremap B ^
 nnoremap E $
+" }}}
 
 " Windows and Tabs {{{
 set splitbelow              " new hoz splits go below
@@ -274,35 +243,11 @@ nnoremap <leader>eb :e ~/.bash_profile<CR>
 nnoremap <leader>et :e ~/.tmux.conf<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
-" save session, reload with vim -S
-nnoremap <leader>s :mksession<CR>
+nmap [q :cprev<CR>
+nmap ]q :cnext<CR>
+nmap ]x :cclose<CR>
 " }}}
-
-"" Buffers {{{
-
-"" This allows buffers to be hidden if you've modified a buffer.
-"" This is almost a must if you wish to use buffers in this way.
-"set hidden
-
-"" To open a new empty buffer
-"" This replaces :tabnew which I used to bind to this mapping
-"nmap <leader>T :enew<cr>
-
-"" Move to the next buffer
-"nmap <leader>l :bnext<CR>
-
-"" Move to the previous buffer
-"nmap <leader>h :bprevious<CR>
-
-"" Close the current buffer and move to the previous one
-"" This replicates the idea of closing a tab
-"nmap <leader>bq :bp <BAR> bd #<CR>
-
-"" Show all open buffers and their status
-"nmap <leader>bl :ls<CR>
-
-"" }}}
-
+"
 " Tabs {{{
 for tab_number in [1,2,3,4, 5, 6]
       execute 'noremap <leader>' . tab_number . ' :tabnext ' . tab_number . '<cr>'
@@ -349,11 +294,13 @@ augroup configgroup
     autocmd!
     autocmd FileType make setlocal noexpandtab
     autocmd FileType c,h,html,css  setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-    autocmd FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd FileType javascript setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
     autocmd FileType verilog setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     autocmd FileType haskell setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
     autocmd BufRead,BufNewFile *.md setlocal colorcolumn=0 filetype=markdown
     autocmd BufRead,BufNewFile *.txt setlocal colorcolumn=0 tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd Filetype json let g:indentLine_setConceal = 0
+    autocmd Filetype vim setlocal foldenable foldmethod=marker foldlevel=0
 augroup END
 
 " }}}
@@ -364,7 +311,7 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_match_window = 'bottom,order:btt'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 'ra'
-
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 " }}}
 
 " nerdTree {{{
@@ -378,7 +325,6 @@ set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
 " }}}
-
 
 " helperFunctions for vimgrep {{{
 function! CmdLine(str)
@@ -417,8 +363,8 @@ map <leader>h :%!stylish-haskell<cr>
 " NerdCommenter {{{
 let g:NERDAltDelims_haskell = 1
 let g:NERDAltDelims_lhaskell = 1
+let NERDSpaceDelims=1
 " }}}
-
 
 " Nerd Fonts {{{
 let g:webdevicons_enable = 1
@@ -436,4 +382,28 @@ map <Leader>vz :VimuxZoomRunner<CR>
 
 " vim-jsx {{{
 let g:jsx_ext_required = 0
+" }}}
+
+" indentLint {{{
+" https://stackoverflow.com/questions/40601818/vim-displays-json-file-without-any-quotes
+let g:indentLine_char = '┆'
+let g:indentLine_enabled = 1
+
+" }}}
+
+" fzf.vim {{{
+set rtp+=~/.fzf
+nmap <C-p> :Files<CR>
+" }}}
+
+" ack.vim {{{
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
+nmap <leader>w :Ack! "\b<cword>\b"<CR>
+" }}}
+
+" Ale {{{
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
 " }}}
