@@ -84,16 +84,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias gpg='gpg2'
-alias grepr='grep -Hnr'
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -118,10 +108,112 @@ if ! shopt -oq posix; then
   fi
 fi
 
+##### EXPORTS ################################################################
+export TERM=xterm-256color
+export NO_AT_BRIDGE=1
+export EDITOR="vim"
+
+COLOR_YELLOW="\033[33m"
+COLOR_YELLOW_BOLD="\033[33;1m"
+COLOR_BLUE="\033[36m"
+COLOR_GREEN="\033[32m"
+COLOR_WHITE="\033[39m"
+COLOR_PURPLE="\033[35m"
+COLOR_RED="\033[31m"
+COLOR_BLUE_BOLD="\033[36;1m"
+NC="\033[m"               # Color Reset
+
+#######  Alias ###############################################################
+alias gt="gnome-terminal &"
+
+alias ls="ls --color=auto"
+alias l="ls"
+alias ll="ls -l"
+alias la="ls -la"
+alias cd..="cd .."
+
+alias vi="vim -u ~/.vimrc_simple"
+alias em="emacs &"
+alias grep="grep --color=always"
+
+alias gad="git add ."
+alias gcm="git commit -m "
+alias gs="git status "
+alias gp="git push origin "
+
+alias tl="tail -f ./*log*"
+alias sz="du --max-depth=1 -h . | sort -n -r"
+
+alias gdb="gdb -q"
+
+alias less-follow="less --follow-name +F"
+
+# try to get UTF-8 Support
+export LANG=en_US.UTF-8
+
+###### FUNCTIONS #############################################################
 c() { cd "$@" && ls; }
 
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
 
-PS1="\[\033[35m\]\t\[\033[m\]-\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$(__git_ps1)\n$ "
+
+git_color() {
+    local git_status
+    git_status="$(timeout 1 git status 2> /dev/null)"
+
+    if [[ $git_status =~ "to be commit" ]]; then
+        echo -e "$COLOR_PURPLE"
+    elif [[ $git_status =~ "not staged for commit" ]]; then
+        echo -e "$COLOR_RED"
+    elif [[ $git_status =~ "Your branch is ahead of" ]]; then
+        echo -e "$COLOR_BLUE"
+    elif [[ ! $git_status =~ "working tree clean" ]]; then
+        echo -e "$COLOR_GREEN"
+    elif [[ $git_status =~ "nothing to commit" ]]; then
+        echo -e "$COLOR_GREEN"
+    else
+        echo -e "$COLOR_WHITE"
+    fi
+}
+
+last_status() {
+    local status="$?"
+    if [[ "$status" != 0 ]]; then
+        echo -e "$COLOR_RED[✘]$NC"
+    else
+        echo -e "$COLOR_GREEN[✔]$NC"
+    fi
+}
+######### PS1 ################################################################
+PS1=""
+PS1+="\[\$(last_status) \]"                         # Status of last command
+PS1+="\[$COLOR_PURPLE\]\t\[$NC\]"                   # Time
+PS1+="-\[$COLOR_BLUE\]\u\[$NC\]"                    # User
+PS1+="@\[$COLOR_GREEN\]\h\[$NC\]"                   # Machine
+PS1+=":\[$COLOR_YELLOW_BOLD\]\w\[$NC\]"             # pwd
+PS1+="\[\$(git_color)\]\$(parse_git_branch)\[$NC\]" # Git
+PS1+="\[$COLOR_WHITE\] \n\$ "                       # Trailing $
+#trap 'echo -ne "$NC"' DEBUG                         # Reset color after enter
+
+# PS1+="\[$COLOR_WHITE\] \n\$ \[$COLOR_BLUE_BOLD\]"   # Trailing $
+# trap 'echo -ne "$NC"' DEBUG                         # Reset color after enter
+
+
+######### Other Config #######################################################
+
+# bash completion
+[ -f /etc/bash_completion.d/git ] && source /etc/bash_completion.d/git
+
+# Bash history management
+# Ingnore case, erase dups, append to history rather than rewriting
+# refresh history before each command to get commands written in other terms
+# export HISTCONTROL=ignoreboth:erasedups
+# shopt -s histappend
+# PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+export HISTSIZE=2000
+
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
