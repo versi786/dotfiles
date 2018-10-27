@@ -21,14 +21,19 @@ Plugin 'alvan/vim-closetag'
 Plugin 'benmills/vimux'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'honza/vim-snippets'
 Plugin 'junegunn/fzf.vim'
 Plugin 'nbouscal/vim-stylish-haskell'
 Plugin 'mileszs/ack.vim'
 Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
+Plugin 'SirVer/ultisnips'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-fugitive'
 Plugin 'urso/haskell_syntax.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/MatchTagAlways'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'w0rp/ale'
@@ -108,12 +113,14 @@ map <leader>sp :lprev<cr>
 " }}}
 
 " Colors and GVim {{{
-"set termguicolors
+" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" set termguicolors
 
 syntax on
     " Solarized Settings {{{
-    "colorscheme solarized8_dark
-    "let g:airline_theme='solarized'
+    " colorscheme solarized8_light
+    " let g:airline_theme='solarized'
     " }}}
 
     " One Dark Settings {{{
@@ -160,7 +167,7 @@ filetype plugin on
 set autoindent              " auto indent
 set smartindent             " smart indent
 
-set listchars=eol:¶,tab:>-,extends:>,precedes:<
+set listchars=tab:>-,extends:>,precedes:<,trail:·  " eol:¶,
 set list                    " make tab characters very obvious
 set conceallevel=0
 " make backspace unstupid: erase autoindents, join lines
@@ -182,8 +189,9 @@ set path+=**                " seach down into sub folders for file tasks
 set showmatch               " highlight matching [{()}]
 
 " shift is for losers
-nnoremap ; :
-vnoremap ; :
+" nnoremap ; :
+" nnoremap : ;
+" vnoremap ; :
 
 set wrap                      " wrap lines
 set linebreak                 " break over-long lines
@@ -204,7 +212,7 @@ set ffs=unix,dos,mac
 set incsearch " starts seach immediately
 set ignorecase " ignore case of the seach
 set smartcase " except when the first letter is capitalized
-set hlsearch " highlight words that are searched for
+" set hlsearch " highlight words that are searched for
 nnoremap <leader>q :nohlsearch<CR> " clear search
 " }}}
 
@@ -234,10 +242,14 @@ nmap <C-l> <C-w>l
 
 " }}}
 
-" Shortucts {{{
+" Shortcucts {{{
 
 " jk is escape (in insert mode)
 inoremap jk <Esc>
+
+" make next easier
+nnoremap n nzz
+nnoremap N Nzz
 
 " edit vimrc/bash_profile and load vimrc bindings
 nnoremap <leader>ev :e $MYVIMRC<CR>
@@ -245,11 +257,21 @@ nnoremap <leader>eb :e ~/.bash_profile<CR>
 nnoremap <leader>et :e ~/.tmux.conf<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
-nmap [q :cprev<CR>
-nmap ]q :cnext<CR>
-nmap ]x :cclose<CR>
+nnoremap [q :cprev<CR>
+nnoremap ]q :cnext<CR>
+nnoremap ]x :cclose<CR>
+
+nnoremap <leader>o :set paste!<CR>
+nnoremap <leader>h :set hlsearch!<CR>
+
+" :W will make dirs if necessary
+fun! WriteCreatingDirs()
+    execute ':silent !mkdir -p %:h'
+    write
+endfunction
+command! W call WriteCreatingDirs()
 " }}}
-"
+
 " Tabs {{{
 for tab_number in [1,2,3,4, 5, 6]
       execute 'noremap <leader>' . tab_number . ' :tabnext ' . tab_number . '<cr>'
@@ -317,7 +339,7 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 " }}}
 
 " nerdTree {{{
-nmap <silent> <leader>f :NERDTreeToggle<cr>
+nnoremap <silent> <leader>f :NERDTreeToggle<cr>
 " }}}
 
 " Backups {{{
@@ -359,13 +381,14 @@ endfunction
 " }}}
 
 " haskell {{{
-map <leader>h :%!stylish-haskell<cr>
+" map <leader>h :%!stylish-haskell<cr>
 " }}}
 
 " NerdCommenter {{{
 let g:NERDAltDelims_haskell = 1
 let g:NERDAltDelims_lhaskell = 1
 let NERDSpaceDelims=1
+let g:NERDDefaultAlign = 'left'
 " }}}
 
 " Nerd Fonts {{{
@@ -395,31 +418,35 @@ let g:indentLine_enabled = 1
 
 " fzf.vim {{{
 set rtp+=~/.fzf
-nmap <C-p> :Files<CR>
+nnoremap <C-p> :Files<CR>
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+let g:fzf_layout = { 'down': '~20%' }
 " }}}
 
 " ack.vim {{{
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
-nmap <leader>w :Ack! "\b<cword>\b"<CR>
+nnoremap <leader>w :Ack! "<cword>"<CR>
+nnoremap <leader>a :Ack! <Space>
 " }}}
 
 " Ale {{{
 
+
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚠'
+
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \}
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
-" After this is configured, :ALEFix will try and fix your JS code with ESLint.
 let g:ale_fixers = { 'javascript': ['eslint'] }
 
 " Set this setting in vimrc if you want to fix files automatically on save.
 " This is off by default.
 let g:ale_fix_on_save = 1
 
-let g:ale_completion_enabled = 1
+" let g:ale_completion_enabled = 1
 
 " }}}
 
@@ -446,4 +473,26 @@ let g:closetag_shortcut = '>'
 " Add > at current position without closing the current tag, default is ''
 "
 let g:closetag_close_shortcut = '<leader>>'
+" }}}
+
+" vimux {{{
+nnoremap <leader>v :VimuxPromptCommand<CR>
+nnoremap <leader>vl :VimuxRunLastCommand<CR>
+nnoremap <leader>vq :VimuxCloseRunner<CR>
+" }}}
+
+" Ultisnips {{{
+let g:UltiSnipsExpandTrigger = '<C-e>'
+let g:UltiSnipsJumpForwardTrigger = '<C-e>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-f>'
+" }}}
+
+" MatchTagAlways {{{
+let g:mta_filetypes = {
+            \ 'javascript.jsx': 1,
+            \ 'html' : 1,
+            \ 'xhtml' : 1,
+            \ 'xml' : 1,
+            \ 'jinja' : 1,
+            \ }
 " }}}

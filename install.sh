@@ -7,7 +7,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files=".vimrc .tmux.conf"    # list of files/folders to symlink in homedir
+files=".vimrc .tmux.conf .bashrc"    # list of files/folders to symlink in homedir
 
 ##########
 
@@ -46,5 +46,3 @@ sudo apt install silversearcher-ag
 echo "installing fzf"
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --all
-
-cat fzf.bashrc >> ~/.bashrc
