@@ -37,6 +37,7 @@ Plugin 'Valloric/MatchTagAlways'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'w0rp/ale'
+Plugin 'tell-k/vim-autopep8'
 
 " True color colorschemes
 Plugin 'sjl/badwolf'
@@ -495,4 +496,8 @@ let g:mta_filetypes = {
             \ 'xml' : 1,
             \ 'jinja' : 1,
             \ }
+" }}}
+
+" AutoPep8 {{{
+let g:autopep8_disable_show_diff=1
 " }}}
