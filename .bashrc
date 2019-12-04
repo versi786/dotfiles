@@ -148,6 +148,8 @@ alias gdb="gdb -q"
 
 alias less-follow="less --follow-name +F"
 
+alias bget="wget --user-agent=\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36\""
+
 # try to get UTF-8 Support
 export LANG=en_US.UTF-8
 
@@ -218,3 +220,10 @@ export HISTSIZE=2000
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 HISTCONTROL=ignoreboth:erasedups
+
+# ESP82xx Requirements
+export PATH=/home/av/Documents/proj/esp-open-sdk/xtensa-lx106-elf/bin:$PATH
+export ESP_ROOT=~/Documents/proj/esp-open-sdk
+
+# RUST
+export PATH="$HOME/.cargo/bin:$PATH"
