@@ -27,6 +27,8 @@ Plugin 'nbouscal/vim-stylish-haskell'
 Plugin 'mileszs/ack.vim'
 Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
+Plugin 'rust-lang/rust.vim'
+Plugin 'Raimondi/delimitMate'
 Plugin 'SirVer/ultisnips'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
@@ -36,8 +38,10 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-scripts/a.vim'
 Plugin 'w0rp/ale'
 Plugin 'tell-k/vim-autopep8'
+Plugin 'rhysd/vim-clang-format'
 
 " True color colorschemes
 Plugin 'sjl/badwolf'
@@ -500,4 +504,15 @@ let g:mta_filetypes = {
 
 " AutoPep8 {{{
 let g:autopep8_disable_show_diff=1
+let g:autopep8_on_save = 1
+" }}}
+
+" rust.vim {{{
+let g:rustfmt_autosave = 1
+" }}}
+
+" clang-format {{{
+autocmd FileType c ClangFormatAutoEnable
+autocmd FileType cpp ClangFormatAutoEnable
+
 " }}}
