@@ -34,7 +34,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'urso/haskell_syntax.vim'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -452,6 +452,7 @@ let g:ale_fixers = { 'javascript': ['eslint'] }
 let g:ale_fix_on_save = 1
 
 " let g:ale_completion_enabled = 1
+let g:ale_c_parse_compile_commands = 1
 
 " }}}
 
@@ -514,5 +515,7 @@ let g:rustfmt_autosave = 1
 " clang-format {{{
 autocmd FileType c ClangFormatAutoEnable
 autocmd FileType cpp ClangFormatAutoEnable
-
+let g:clang_format#style_options = {
+            \ "BinPackArguments": "false",
+            \ "BinPackParameters": "false"}
 " }}}
