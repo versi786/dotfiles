@@ -2,74 +2,51 @@
 " using checkinstall https://help.ubuntu.com/community/CheckInstalet
 " dpkg -r vim -- to remove vim, why would you ever do this though
 
-" Vundle {{{
+" vim-plugged {{{
 set nocompatible              " be iMproved, required
-filetype off                  " required
-set shell=bash
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 " add plugins after this line
-Plugin 'airblade/vim-gitgutter'
-Plugin 'alvan/vim-closetag'
-Plugin 'benmills/vimux'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'honza/vim-snippets'
-Plugin 'junegunn/fzf.vim'
-Plugin 'nbouscal/vim-stylish-haskell'
-Plugin 'mileszs/ack.vim'
-Plugin 'mxw/vim-jsx'
-Plugin 'pangloss/vim-javascript'
-Plugin 'rust-lang/rust.vim'
-Plugin 'Raimondi/delimitMate'
-Plugin 'SirVer/ultisnips'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-fugitive'
-Plugin 'urso/haskell_syntax.vim'
-" Plugin 'Valloric/YouCompleteMe'
-Plugin 'Valloric/MatchTagAlways'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-scripts/a.vim'
-Plugin 'w0rp/ale'
-Plugin 'tell-k/vim-autopep8'
-Plugin 'rhysd/vim-clang-format'
+Plug 'airblade/vim-gitgutter'
+Plug 'alvan/vim-closetag'
+Plug 'benmills/vimux'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'honza/vim-snippets'
+Plug 'junegunn/fzf.vim'
+Plug 'nbouscal/vim-stylish-haskell'
+Plug 'mileszs/ack.vim'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'rust-lang/rust.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'SirVer/ultisnips'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'urso/haskell_syntax.vim'
+" Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/MatchTagAlways'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/a.vim'
+Plug 'w0rp/ale'
+Plug 'tell-k/vim-autopep8'
+Plug 'rhysd/vim-clang-format'
 
 " True color colorschemes
-Plugin 'sjl/badwolf'
-Plugin 'joshdick/onedark.vim'
-Plugin 'lifepillar/vim-solarized8'
-Plugin 'morhetz/gruvbox'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'crusoexia/vim-monokai'
+Plug 'sjl/badwolf'
+Plug 'joshdick/onedark.vim'
+Plug 'lifepillar/vim-solarized8'
+Plug 'morhetz/gruvbox'
+Plug 'nanotech/jellybeans.vim'
+Plug 'crusoexia/vim-monokai'
 
 " Graveyard
-" Plugin 'vim-syntastic/syntastic'
-" Plugin 'ctrlpvim/ctrlp.vim'
-" Plugin 'Yggdroot/indentLine'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+" Plug 'vim-syntastic/syntastic'
+" Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'Yggdroot/indentLine'
+call plug#end()
 " }}}
 
 " Leader {{{
