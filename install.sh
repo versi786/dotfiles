@@ -7,7 +7,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files=".vimrc .tmux.conf .bashrc"    # list of files/folders to symlink in homedir
+files=".vimrc .tmux.conf .bashrc .config/nvim/init.vim"    # list of files/folders to symlink in homedir
 
 ##########
 
@@ -50,18 +50,17 @@ echo "installing fzf"
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --all
 
-echo "Installing Vim Plugins"
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
+echo "Installing plugins"
+vim +PlugInstall +CocInstall +qall
 
 echo "Installing powerline fonts"
 # clone
 git clone https://github.com/powerline/fonts.git --depth=1
 # install
-cd fonts
+cd ./fonts
 ./install.sh
 # clean-up a bit
 cd ..
-rm -rf fonts
+rm -rf ./fonts
 
 echo "Make sure you change the font to a powerline font from gnome-terminal settings and change the profile to OneDark"

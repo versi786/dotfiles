@@ -260,6 +260,7 @@ nnoremap <leader>h :set hlsearch!<CR>
 fun! WriteCreatingDirs()
     execute ':silent !mkdir -p %:h'
     write
+    redraw!
 endfunction
 command! W call WriteCreatingDirs()
 " }}}

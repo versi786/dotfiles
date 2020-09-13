@@ -150,6 +150,8 @@ alias less-follow="less --follow-name +F"
 
 alias bget="wget --user-agent=\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36\""
 
+alias vim="nvim"
+
 # try to get UTF-8 Support
 export LANG=en_US.UTF-8
 
