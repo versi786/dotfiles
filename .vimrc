@@ -181,9 +181,9 @@ set linebreak                 " break over-long lines
 " set textwidth=80            " enforce 80 characters
 
 " kill backups
-" set nobackup
-" set nowb
-" set noswapfile
+set nobackup
+set nowb
+set noswapfile
 "
 " UTF-8 encoding, unix endings
 set encoding=utf8
@@ -326,11 +326,11 @@ nnoremap <silent> <leader>f :NERDTreeToggle<cr>
 " }}}
 
 " Backups {{{
-set backup
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set backupskip=/tmp/*,/private/tmp/*
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set writebackup
+" set backup
+" set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+" set backupskip=/tmp/*,/private/tmp/*
+" set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+" set writebackup
 " }}}
 
 " helperFunctions for vimgrep {{{

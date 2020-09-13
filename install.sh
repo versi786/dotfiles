@@ -31,7 +31,6 @@ for file in $files; do
     ln -s $dir/$file ~/$file
 done
 
-
 echo "Installing TPM"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 echo "Installing TPM Plugins"
