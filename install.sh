@@ -11,6 +11,12 @@ files=".vimrc .tmux.conf .bashrc .config/nvim/init.vim"    # list of files/folde
 
 ##########
 
+if ! command -v stow &> /dev/null
+then
+    echo "stow could not be found"
+    exit
+fi
+
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles in ~"
 mkdir -p $olddir

@@ -18,7 +18,7 @@ Plug 'nbouscal/vim-stylish-haskell'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
 Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
 Plug 'rust-lang/rust.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
@@ -69,34 +69,34 @@ let g:airline#extensions#syntastic#enabled = 1
 " }}}
 
 " Syntastic {{{
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_loc_list_height=1
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 0
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_loc_list_height=1
 
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_warning_symbol = "⚠"
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_style_warning_symbol = '💩'
+" let g:syntastic_error_symbol = '❌'
+" let g:syntastic_warning_symbol = "⚠"
+" let g:syntastic_style_error_symbol = '⁉️'
+" let g:syntastic_style_warning_symbol = '💩'
 
-" javascript
-let g:syntastic_javascript_checkers = ['eslint']
+" " javascript
+" let g:syntastic_javascript_checkers = ['eslint']
 
-" verilog
-let g:syntastic_verilog_include_dirs = ['src', 'src/include', 'include']
+" " verilog
+" let g:syntastic_verilog_include_dirs = ['src', 'src/include', 'include']
 
-" asm
-let g:syntastic_ignore_files=['asm'] " ignore asm files
+" " asm
+" let g:syntastic_ignore_files=['asm'] " ignore asm files
 
 
-"shortucts
-map <leader>sn :lnext<cr>
-map <leader>sp :lprev<cr>
+" "shortucts
+" map <leader>sn :lnext<cr>
+" map <leader>sp :lprev<cr>
 
 " }}}
 
@@ -423,26 +423,26 @@ if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 nnoremap <leader>w :Ack! "<cword>"<CR>
-nnoremap <leader>g :Ack! <Space>
+nnoremap <leader>s :Ack! <Space>
 " }}}
 
 " Ale {{{
 
 
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚠'
+" let g:ale_sign_error = '✗'
+" let g:ale_sign_warning = '⚠'
 
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\}
-let g:ale_fixers = { 'javascript': ['eslint'] }
+" let g:ale_linters = {
+" \   'javascript': ['eslint'],
+" \}
+" let g:ale_fixers = { 'javascript': ['eslint'] }
 
-" Set this setting in vimrc if you want to fix files automatically on save.
-" This is off by default.
-let g:ale_fix_on_save = 1
+" " Set this setting in vimrc if you want to fix files automatically on save.
+" " This is off by default.
+" let g:ale_fix_on_save = 1
 
-" let g:ale_completion_enabled = 1
-let g:ale_c_parse_compile_commands = 1
+" " let g:ale_completion_enabled = 1
+" let g:ale_c_parse_compile_commands = 1
 
 " }}}
 
@@ -513,12 +513,15 @@ let g:clang_format#style_options = {
 "coc {{{
 let g:coc_global_extensions = [
 \ 'coc-clangd',
+\ 'coc-css',
+\ 'coc-eslint',
+\ 'coc-html',
 \ 'coc-json',
 \ 'coc-tsserver',
-\ 'coc-html',
-\ 'coc-css',
+\ 'coc-tslint-plugin',
 \ 'coc-yaml',
 \ ]
+" \ 'coc-prettier',
 
 " Below is the default coc.nvim config from github
 " TextEdit might fail if hidden is not set.
@@ -612,7 +615,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd FileType javascript,typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
