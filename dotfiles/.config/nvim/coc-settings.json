@@ -1,5 +1,7 @@
 {
     "clangd.compilationDatabasePath": "build",
     "clangd.arguments": ["--clang-tidy=false"],
-    "clangd.semanticHighlighting": true
+    "clangd.semanticHighlighting": true,
+    "coc.preferences.formatOnSaveFiletypes": [],
+    "javascript.suggestionActions.enabled": false
 }
