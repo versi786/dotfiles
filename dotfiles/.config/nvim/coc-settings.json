@@ -1,7 +1,13 @@
 {
-    "clangd.compilationDatabasePath": "build",
-    "clangd.arguments": ["--clang-tidy=false"],
-    "clangd.semanticHighlighting": true,
-    "coc.preferences.formatOnSaveFiletypes": [],
-    "javascript.suggestionActions.enabled": false
+  "clangd.compilationDatabasePath": "build",
+  "clangd.arguments": ["--clang-tidy=false"],
+  "clangd.semanticHighlighting": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "javascriptreact",
+    "json"
+  ],
+  "javascript.format.enabled": false,
+  "javascript.suggestionActions.enabled": false,
+  "typescript.format.enabled": false
 }

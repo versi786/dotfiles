@@ -13,28 +13,27 @@ Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'honza/vim-snippets'
+Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf.vim'
+Plug 'justinmk/vim-sneak'
 Plug 'nbouscal/vim-stylish-haskell'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
-Plug 'mxw/vim-jsx'
-" Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 Plug 'rust-lang/rust.vim'
-Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'urso/haskell_syntax.vim'
-" Plug 'Valloric/YouCompleteMe'
 Plug 'Valloric/MatchTagAlways'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/a.vim'
-" Plug 'w0rp/ale'
 Plug 'tell-k/vim-autopep8'
 Plug 'rhysd/vim-clang-format'
+Plug 'unblevable/quick-scope'
 
 " True color colorschemes
 Plug 'sjl/badwolf'
@@ -51,12 +50,11 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'
 " Graveyard
 " Plug 'vim-syntastic/syntastic'
 " Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'Yggdroot/indentLine'
 call plug#end()
 " }}}
 
 " Leader {{{
-let mapleader=","           " leader is comma
+let mapleader=',' " leader is comma
 " }}}
 
 " Airline {{{
@@ -164,7 +162,7 @@ set backspace=indent,eol,start
 " }}}
 
 " UI Config {{{
-set number                  " show line numbers
+set number relativenumber   " show line numbers, and relative
 set showcmd                 " show command in bottom bar (hidden by Airline)
 set cursorline              " highlight current line
 "hi CursorLine term=bold cterm=bold guibg=Grey40
@@ -194,6 +192,9 @@ set noswapfile
 " UTF-8 encoding, unix endings
 set encoding=utf8
 set ffs=unix,dos,mac
+
+" Allow mouse for clicking
+set mouse=a
 
 " }}}
 
@@ -311,12 +312,11 @@ augroup configgroup
     autocmd!
     autocmd FileType make setlocal noexpandtab
     autocmd FileType c,h,html,css  setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-    autocmd FileType javascript setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+    autocmd FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     autocmd FileType verilog setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     autocmd FileType haskell setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
     autocmd BufRead,BufNewFile *.md setlocal colorcolumn=0 filetype=markdown
     autocmd BufRead,BufNewFile *.txt setlocal colorcolumn=0 tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-    autocmd Filetype json let g:indentLine_setConceal = 0
     autocmd Filetype vim setlocal foldenable foldmethod=marker foldlevel=0
 augroup END
 
@@ -398,21 +398,10 @@ map <Leader>vi :VimuxInspectRunner<CR>
 map <Leader>vz :VimuxZoomRunner<CR>
 " }}}
 
-" vim-jsx {{{
-let g:jsx_ext_required = 0
-" }}}
-
-" indentLint {{{
-" https://stackoverflow.com/questions/40601818/vim-displays-json-file-without-any-quotes
-let g:indentLine_char = '┆'
-let g:indentLine_enabled = 1
-
-" }}}
-
 " fzf.vim {{{
 set rtp+=~/.fzf
 nnoremap <C-p> :Files<CR>
-nnoremap \ :Buffers<CR>
+nnoremap <leader>b :Buffers<CR>
 
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:fzf_layout = { 'down': '~20%' }
@@ -518,10 +507,10 @@ let g:coc_global_extensions = [
 \ 'coc-html',
 \ 'coc-json',
 \ 'coc-tsserver',
+\ 'coc-prettier',
 \ 'coc-tslint-plugin',
 \ 'coc-yaml',
 \ ]
-" \ 'coc-prettier',
 
 " Below is the default coc.nvim config from github
 " TextEdit might fail if hidden is not set.
@@ -677,4 +666,20 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" }}}
+
+" auto-pairs {{{
+let g:AutoPairsCenterLine = 0
+" }}}
+
+" vim-sneak {{{
+" map f <Plug>Sneak_f
+" map F <Plug>Sneak_F
+" map t <Plug>Sneak_t
+" map T <Plug>Sneak_T
+" }}}
+
+" quick-scope {{{
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " }}}
