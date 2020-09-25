@@ -124,32 +124,25 @@ COLOR_BLUE_BOLD="\033[36;1m"
 NC="\033[m"               # Color Reset
 
 #######  Alias ###############################################################
-alias gt="gnome-terminal &"
-
-alias ls="ls --color=auto"
-alias l="ls"
-alias ll="ls -l"
-alias la="ls -la"
+alias bget="wget --user-agent=\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36\""
 alias cd..="cd .."
-
-alias vi="vim -u ~/.vimrc_simple"
 alias em="emacs &"
-alias grep="grep --color=always"
-
 alias gad="git add ."
 alias gcm="git commit -m "
-alias gs="git status "
-alias gp="git push origin "
-
-alias tl="tail -f ./*log*"
-alias sz="du --max-depth=1 -h . | sort -n -r"
-
 alias gdb="gdb -q"
-
+alias gp="git push origin "
+alias grep="grep --color=always"
+alias gs="git status "
+alias gt="gnome-terminal &"
+alias l="ls"
+alias la="ls -la"
 alias less-follow="less --follow-name +F"
-
-alias bget="wget --user-agent=\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36\""
-
+alias ll="ls -l"
+alias ls="ls --color=auto"
+alias rm="rm -i"
+alias sz="du --max-depth=1 -h . | sort -n -r"
+alias tl="tail -f ./*log*"
+alias vi="vim -u ~/.vimrc_simple"
 alias vim="nvim"
 
 # try to get UTF-8 Support

@@ -3,6 +3,19 @@
 # This script creates symlinks from the home directory to any desired dotfiles
 ############################
 
+if ! [[ $(lsb_release -i) =~ 'Ubuntu' ]]; then
+    echo "This script probably only works on Ubuntu, exiting"
+fi
+
+sudo apt install \
+    dconf-editor \
+    gnome-terminal \
+    nodejs\
+    stow \
+    xclip \
+    silversearcher-ag \
+    && echo Done installing programs || exit
+
 if ! command -v stow &> /dev/null
 then
     echo "stow could not be found"
@@ -10,6 +23,7 @@ then
 fi
 
 # Stow will exit with error if it is going to overwrite an existing file
+# this will create a symlink in ~ to files in ./dotfiles
 stow -v -t ~ dotfiles || exit
 
 echo installing vim-plug
@@ -20,16 +34,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 # git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # echo "Installing TPM Plugins"
 # ~/.tmux/plugins/tpm/scripts/install_plugins.sh
-
-echo "Installing xclip"
-sudo apt install xclip
-
-echo "Installing ag"
-sudo apt install silversearcher-ag
-
-echo "installing fzf"
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install --all
 
 echo "Installing plugins"
 vim +PlugInstall +CocInstall +qall
@@ -43,5 +47,8 @@ cd ./fonts
 # clean-up a bit
 cd ..
 rm -rf ./fonts
+
+echo "Installing OneDark colorsheme"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/denysdovhan/gnome-terminal-one/master/one-dark.sh)"
 
 echo "Make sure you change the font to a powerline font from gnome-terminal settings and change the profile to OneDark"
