@@ -5,15 +5,21 @@
 
 if ! [[ $(lsb_release -i) =~ 'Ubuntu' ]]; then
     echo "This script probably only works on Ubuntu, exiting"
+    exit
 fi
 
+sudo apt update
+sudo apt upgrade
 sudo apt install \
+    build-essential \
+    clang \
+    clangd \
     dconf-editor \
     gnome-terminal \
     nodejs\
+    silversearcher-ag \
     stow \
     xclip \
-    silversearcher-ag \
     && echo Done installing programs || exit
 
 if ! command -v stow &> /dev/null
