@@ -14,13 +14,18 @@ sudo apt install \
     build-essential \
     clang \
     clangd \
+    cmake \
     dconf-editor \
     gnome-terminal \
-    nodejs\
+    nodejs \
+    npm \
     silversearcher-ag \
     stow \
     xclip \
     && echo Done installing programs || exit
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup component add rls rust-analysis rust-src clippy rustfmt
 
 if ! command -v stow &> /dev/null
 then
