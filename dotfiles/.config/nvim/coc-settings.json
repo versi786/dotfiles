@@ -3,11 +3,13 @@
   "clangd.arguments": ["--clang-tidy=false"],
   "clangd.semanticHighlighting": true,
   "coc.preferences.formatOnSaveFiletypes": [
+    "rust",
     "javascript",
     "javascriptreact",
     "json"
   ],
   "javascript.format.enabled": false,
   "javascript.suggestionActions.enabled": false,
+  "rust.clippy_preference": "on",
   "typescript.format.enabled": false
 }

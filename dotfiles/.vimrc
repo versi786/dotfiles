@@ -14,6 +14,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'nbouscal/vim-stylish-haskell'
@@ -119,6 +120,7 @@ syntax on
 colorscheme gruvbox
 let g:airline_theme='gruvbox'
 set background=dark
+set termguicolors
 " }}}
 
     " badwolf {{{
@@ -193,8 +195,11 @@ set noswapfile
 set encoding=utf8
 set ffs=unix,dos,mac
 
-" Allow mouse for clicking
-set mouse=a
+" Do not allow mouse for clicking
+set mouse=
+
+" Show some lines below the cursor
+set scrolloff=5
 
 " }}}
 
@@ -402,6 +407,7 @@ map <Leader>vz :VimuxZoomRunner<CR>
 set rtp+=~/.fzf
 nnoremap <C-p> :Files<CR>
 nnoremap <leader>b :Buffers<CR>
+nnoremap \ :Buffers<CR>
 
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:fzf_layout = { 'down': '~20%' }
@@ -488,7 +494,7 @@ let g:autopep8_on_save = 1
 " }}}
 
 " rust.vim {{{
-let g:rustfmt_autosave = 1
+" let g:rustfmt_autosave = 1
 " }}}
 
 " clang-format {{{
@@ -506,9 +512,10 @@ let g:coc_global_extensions = [
 \ 'coc-eslint',
 \ 'coc-html',
 \ 'coc-json',
-\ 'coc-tsserver',
 \ 'coc-prettier',
+\ 'coc-rls',
 \ 'coc-tslint-plugin',
+\ 'coc-tsserver',
 \ 'coc-yaml',
 \ ]
 
