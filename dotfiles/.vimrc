@@ -110,15 +110,15 @@ syntax on
     " }}}
 
 " One Dark Settings {{{
-colorscheme onedark
-let g:airline_theme='onedark'
-set t_ut= " force redraw of background color, different from terminal background
+" colorscheme onedark
+" let g:airline_theme='onedark'
+" set t_ut= " force redraw of background color, different from terminal background
 " }}}
 
 " gruvbox {{{
-" colorscheme gruvbox
-" let g:airline_theme='gruvbox'
-" set background=dark
+colorscheme gruvbox
+let g:airline_theme='gruvbox'
+set background=dark
 " }}}
 
     " badwolf {{{
@@ -162,7 +162,7 @@ set backspace=indent,eol,start
 " }}}
 
 " UI Config {{{
-set number relativenumber   " show line numbers, and relative
+set number "  relativenumber   " show line numbers, and relative
 set showcmd                 " show command in bottom bar (hidden by Airline)
 set cursorline              " highlight current line
 "hi CursorLine term=bold cterm=bold guibg=Grey40
