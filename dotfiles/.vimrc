@@ -32,7 +32,7 @@ Plug 'Valloric/MatchTagAlways'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/a.vim'
-Plug 'tell-k/vim-autopep8'
+" Plug 'tell-k/vim-autopep8'
 Plug 'rhysd/vim-clang-format'
 Plug 'unblevable/quick-scope'
 
@@ -65,6 +65,8 @@ set noshowmode              " Airline does this for us
 let g:airline_powerline_fonts = 1
 " Syntastic integration
 let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 1
 " }}}
 
 " Syntastic {{{
@@ -169,6 +171,8 @@ set showcmd                 " show command in bottom bar (hidden by Airline)
 set cursorline              " highlight current line
 "hi CursorLine term=bold cterm=bold guibg=Grey40
 "hi CursorLine   cterm=NONE ctermbg=234 " bloomberg color line
+set modelines=5
+set modeline
 
 set wildmenu                " visual autocomplete for command menu
 set wildmode=longest,list                " bash-like tab completion
@@ -513,6 +517,7 @@ let g:coc_global_extensions = [
 \ 'coc-html',
 \ 'coc-json',
 \ 'coc-prettier',
+\ 'coc-python',
 \ 'coc-rls',
 \ 'coc-tslint-plugin',
 \ 'coc-tsserver',
