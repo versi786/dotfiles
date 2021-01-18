@@ -230,4 +230,7 @@ export PATH="$HOME/gems/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
 # pip install --user
-export PATH="/home/av/.local/bin:$PATH"
+export PATH="~/.local/bin:$PATH"
+
+# pip install --user
+export PATH="~/bin:$PATH"
