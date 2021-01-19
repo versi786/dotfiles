@@ -234,3 +234,4 @@ export PATH="~/.local/bin:$PATH"
 
 # pip install --user
 export PATH="~/bin:$PATH"
+source "$HOME/.cargo/env"
