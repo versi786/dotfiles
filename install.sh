@@ -11,10 +11,6 @@ fi
 sudo apt update
 sudo apt upgrade
 sudo apt install \
-    build-essential \
-    clang \
-    clangd \
-    cmake \
     dconf-editor \
     dconf-cli \
     gnome-terminal \
@@ -26,8 +22,6 @@ sudo apt install \
     neovim \
     && echo Done installing programs || exit
 
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-rustup component add rls rust-analysis rust-src clippy rustfmt
 
 if ! command -v stow &> /dev/null
 then
@@ -67,4 +61,4 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/denysdovhan/gnome-termin
 echo "Make sure you change the font to a powerline font from gnome-terminal settings and change the profile to OneDark"
 
 echo "Set the default terminal emulator to gnome-terminal"
-sudo update-alternatives --config x-terminal-emulator
+update-alternatives --config x-terminal-emulator
