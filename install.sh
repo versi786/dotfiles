@@ -44,6 +44,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 echo "Installing plugins"
 vim +PlugInstall +CocInstall +qall
+nvim +PlugInstall +CocInstall +qall
 
 echo "Installing powerline fonts"
 # clone
@@ -55,10 +56,26 @@ cd ./fonts
 cd ..
 rm -rf ./fonts
 
+echo
+echo -e "Create a custom profile in gnome-termina, so that we can create a onedark one. It can be empty but one needs to be manually created from UI first"
+echo "Edit > Preferences > Profile > + "
+gnome-terminal
+read -p "Press enter to continue"
+
 echo "Installing OneDark colorsheme"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/denysdovhan/gnome-terminal-one/master/one-dark.sh)"
 
-echo "Make sure you change the font to a powerline font from gnome-terminal settings and change the profile to OneDark"
+echo "Set default terminal app to gnome-terimnal"
 
-echo "Set the default terminal emulator to gnome-terminal"
-update-alternatives --config x-terminal-emulator
+if [[ $(which exo-preferred-applications) ]]; then
+    exo-preferred-applications
+else
+    sudo apt install xfce4-settings
+    xfce4-mime-settings
+fi
+
+echo
+echo "Utilities > Terminal Emulator"
+read -p "Press enter to continue"
+
+echo "Make sure you change the font to a powerline font from gnome-terminal settings and change the profile to OneDark"
