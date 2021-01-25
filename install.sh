@@ -16,12 +16,18 @@ sudo apt install \
     clangd \
     cmake \
     dconf-editor \
+    dconf-cli \
     gnome-terminal \
     nodejs \
     npm \
     silversearcher-ag \
     stow \
+    tmux \
     xclip \
+    vim \
+    neovim \
+    curl \
+    python3-distutils \
     && echo Done installing programs || exit
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -61,5 +67,19 @@ rm -rf ./fonts
 
 echo "Installing OneDark colorsheme"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/denysdovhan/gnome-terminal-one/master/one-dark.sh)"
+# mkdir -p "./src"
+# cd "./src"
+# git clone https://github.com/Mayccoll/Gogh.git gogh
+# cd gogh/themes
+
+# # necessary on ubuntu
+# export TERMINAL=gnome-terminal
+
+# # install themes
+# ./one-dark.sh
+
+# # cleanup
+# cd ../../../
+# rm -rf ./src
 
 echo "Make sure you change the font to a powerline font from gnome-terminal settings and change the profile to OneDark"

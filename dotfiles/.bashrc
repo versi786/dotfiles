@@ -231,3 +231,4 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
 # pip install --user
 export PATH="/home/av/.local/bin:$PATH"
+source "$HOME/.cargo/env"
