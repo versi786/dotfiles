@@ -3,7 +3,7 @@
 # This script creates symlinks from the home directory to any desired dotfiles
 ############################
 
-if ! [[ $(lsb_release -i) =~ 'Ubuntu' ]]; then
+if ! [[ $(lsb_release -i) =~ 'Ubuntu' || $(lsb_release -i) =~ 'Kali' ]]; then
     echo "This script probably only works on Ubuntu, exiting"
     exit
 fi
@@ -11,27 +11,22 @@ fi
 sudo apt update
 sudo apt upgrade
 sudo apt install \
-    build-essential \
-    clang \
-    clangd \
-    cmake \
-    dconf-editor \
+    curl \
     dconf-cli \
+    dconf-editor \
     gnome-terminal \
+    neovim \
     nodejs \
     npm \
+    python3-distutils \
     silversearcher-ag \
     stow \
     tmux \
-    xclip \
+    uuid-runtime \
     vim \
-    neovim \
-    curl \
-    python3-distutils \
+    xclip \
     && echo Done installing programs || exit
 
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-rustup component add rls rust-analysis rust-src clippy rustfmt
 
 if ! command -v stow &> /dev/null
 then
@@ -54,6 +49,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 echo "Installing plugins"
 vim +PlugInstall +CocInstall +qall
+nvim +PlugInstall +CocInstall +qall
 
 echo "Installing powerline fonts"
 # clone
@@ -64,6 +60,12 @@ cd ./fonts
 # clean-up a bit
 cd ..
 rm -rf ./fonts
+
+echo
+echo -e "Create a custom profile in gnome-termina, so that we can create a onedark one. It can be empty but one needs to be manually created from UI first"
+echo "Edit > Preferences > Profile > + "
+gnome-terminal
+read -p "Press enter to continue"
 
 echo "Installing OneDark colorsheme"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/denysdovhan/gnome-terminal-one/master/one-dark.sh)"
@@ -82,4 +84,21 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/denysdovhan/gnome-termin
 # cd ../../../
 # rm -rf ./src
 
-echo "Make sure you change the font to a powerline font from gnome-terminal settings and change the profile to OneDark"
+echo "Set default terminal app to gnome-terimnal"
+echo "Utilities > Terminal Emulator"
+read -p "Press enter to continue"
+
+if [[ $(which exo-preferred-applications) ]]; then
+    exo-preferred-applications
+else
+    sudo apt install xfce4-settings
+    xfce4-mime-settings
+fi
+
+read -p "Press enter to continue"
+
+echo
+
+echo "change shell with: chsh -s $(which bash)"
+echo "Make sure you change the font to a powerline font from gnome-terminal settings and change the profile to OneDark, Deja Vu Sans Mono Book for Powerline, size 12"
+
