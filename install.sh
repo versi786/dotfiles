@@ -20,6 +20,7 @@ sudo apt install \
     stow \
     xclip \
     neovim \
+    uuid-runtime \
     && echo Done installing programs || exit
 
 
