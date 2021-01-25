@@ -67,6 +67,8 @@ echo "Installing OneDark colorsheme"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/denysdovhan/gnome-terminal-one/master/one-dark.sh)"
 
 echo "Set default terminal app to gnome-terimnal"
+echo "Utilities > Terminal Emulator"
+read -p "Press enter to continue"
 
 if [[ $(which exo-preferred-applications) ]]; then
     exo-preferred-applications
@@ -75,8 +77,8 @@ else
     xfce4-mime-settings
 fi
 
-echo
-echo "Utilities > Terminal Emulator"
 read -p "Press enter to continue"
+
+echo
 
 echo "Make sure you change the font to a powerline font from gnome-terminal settings and change the profile to OneDark"
