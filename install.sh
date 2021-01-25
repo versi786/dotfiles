@@ -100,5 +100,5 @@ read -p "Press enter to continue"
 echo
 
 echo "change shell with: chsh -s $(which bash)"
-echo "Make sure you change the font to a powerline font from gnome-terminal settings and change the profile to OneDark, Deja Vu Sans Mono Book for Powerline, size 12"
+echo "Make sure you change the font to a powerline font from gnome-terminal settings and change the profile to OneDark, Deja Vu Sans Mono Book for Powerline, size 11"
 
