@@ -82,3 +82,5 @@ read -p "Press enter to continue"
 echo
 
 echo "Make sure you change the font to a powerline font from gnome-terminal settings and change the profile to OneDark"
+
+echo "change shell with: chsh -s $(which bash)"
