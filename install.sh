@@ -22,7 +22,7 @@ sudo apt install \
     silversearcher-ag \
     stow \
     tmux \
-    uuid-runtime \
+    uuid-runtime `# Needed by gnome-termina settings` \
     vim \
     xclip \
     && echo Done installing programs || exit
