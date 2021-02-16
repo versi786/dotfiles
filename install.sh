@@ -8,6 +8,8 @@ if ! [[ $(lsb_release -i) =~ 'Ubuntu' ]]; then
     exit
 fi
 
+mkdir -p ~/.config
+
 sudo apt update
 sudo apt upgrade
 sudo apt install \
@@ -47,7 +49,8 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 # ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 
 echo "Installing plugins"
-vim +PlugInstall +CocInstall +qall
+vim +PlugInstall +qall
+vim +CocInstall +qall
 
 echo "Installing powerline fonts"
 # clone
@@ -59,6 +62,8 @@ cd ./fonts
 cd ..
 rm -rf ./fonts
 
+echo "In order to create a color scheme for gnome terminal you must first create your own custom profile first... it needs to create the settings db. Go to Edit, Preferences, and then click the plus sign next to profiles on the left bar."
+read -s -n 1 -p "Press any key to continue . . ." && echo ""
 echo "Installing OneDark colorsheme"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/denysdovhan/gnome-terminal-one/master/one-dark.sh)"
 
