@@ -230,5 +230,9 @@ export PATH="$HOME/gems/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
 # pip install --user
-export PATH="/home/av/.local/bin:$PATH"
+export PATH="~/.local/bin:$PATH"
+
+export PATH="~/bin:$PATH"
+
+# rust
 source "$HOME/.cargo/env"
