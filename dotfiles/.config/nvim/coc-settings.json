@@ -6,7 +6,6 @@
     "javascript",
     "javascriptreact",
     "json",
-    "python",
     "rust"
   ],
   "javascript.format.enabled": false,
