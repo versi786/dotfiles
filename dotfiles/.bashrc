@@ -235,4 +235,4 @@ export PATH="~/.local/bin:$PATH"
 export PATH="~/bin:$PATH"
 
 # rust
-source "$HOME/.cargo/env"
+. "$HOME/.cargo/env"
