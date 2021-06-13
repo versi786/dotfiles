@@ -10,7 +10,7 @@ fi
 
 mkdir -p ~/.config
 
-sudo apt update
+udo apt update
 sudo apt upgrade
 sudo apt install \
     curl \
@@ -21,6 +21,7 @@ sudo apt install \
     nodejs \
     npm \
     python3-distutils \
+    ripgrep \
     silversearcher-ag \
     stow \
     tmux \
@@ -52,6 +53,10 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 echo "Installing plugins"
 vim +PlugInstall +CocInstall +qall
 nvim +PlugInstall +CocInstall +qall
+
+echo install fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 
 echo "Installing powerline fonts"
 # clone

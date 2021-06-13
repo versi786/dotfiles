@@ -418,9 +418,10 @@ let g:fzf_layout = { 'down': '~20%' }
 " }}}
 
 " ack.vim {{{
-if executable('ag')
-    let g:ackprg = 'ag --vimgrep'
+if executable('rg')
+    let g:ackprg = 'rg --vimgrep --smart-case'
 endif
+
 nnoremap <leader>w :Ack! "<cword>"<CR>
 nnoremap <leader>s :Ack! <Space>
 " }}}
