@@ -240,6 +240,7 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export PATH="~/.local/bin:$PATH"
 
 export PATH="~/bin:$PATH"
+export PATH="~/.bin:$PATH"
 
 # rust
 . "$HOME/.cargo/env"

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [[ $1 == "--help" ]] || [[ $1 == "-h" ]] || [[ $# -ne 1 ]]; then
+    echo "Usage: $0 <path>"
+    exit
+fi
+
+# Remove trailing slash
+P=$(echo "$1" | sed 's|/$||g')
+
+echo "Rercurively listing $P"
+echo
+
+echo "$P" | awk -F'/' '{
+    if ($0 ~ /^[/]/) {
+        CURR_PATH="/";
+        START=2
+        print CURR_PATH
+    } else {
+        CURR_PATH="";
+        START=1
+    }
+    for(i=START; i<=NF; i++) {
+        CURR_PATH=CURR_PATH $i;
+        print "\"" CURR_PATH "\""
+        CURR_PATH=CURR_PATH "/";
+    }
+}' | xargs ls -ld
+
+

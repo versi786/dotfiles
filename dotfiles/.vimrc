@@ -413,7 +413,6 @@ nnoremap <C-p> :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap \ :Buffers<CR>
 
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:fzf_layout = { 'down': '~20%' }
 " }}}
 
