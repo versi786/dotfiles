@@ -8,7 +8,7 @@ fi
 # Remove trailing slash
 P=$(echo "$1" | sed 's|/$||g')
 
-echo "Rercurively listing \"$P\""
+echo "Recursively listing \"$P\""
 echo
 
 echo "$P" | awk -F'/' '{
