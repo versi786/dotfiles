@@ -22,6 +22,7 @@ sudo apt install \
     nodejs \
     npm \
     python3-distutils \
+    python3-pip \
     ripgrep \
     silversearcher-ag \
     stow \
