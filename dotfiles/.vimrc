@@ -1,7 +1,3 @@
-
-" using checkinstall https://help.ubuntu.com/community/CheckInstalet
-" dpkg -r vim -- to remove vim, why would you ever do this though
-
 " vim-plugged {{{
 set nocompatible              " be iMproved, required
 call plug#begin('~/.vim/plugged')
