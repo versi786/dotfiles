@@ -257,7 +257,8 @@ nnoremap ]q :cnext<CR>
 nnoremap ]x :cclose<CR>
 
 "Paste in visual mode without copying
-xnoremap p pgvy
+" xnoremap p pgvy
+vnoremap <leader>p "_dP
 
 nnoremap <leader>o :set paste!<CR>
 nnoremap <leader>h :set hlsearch!<CR>
