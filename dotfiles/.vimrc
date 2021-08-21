@@ -58,7 +58,7 @@ let mapleader=',' " leader is comma
 set laststatus=2            " show whole status bar
 set noshowmode              " Airline does this for us
 " use powerline fonts
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 " Syntastic integration
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
