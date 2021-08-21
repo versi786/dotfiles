@@ -1,0 +1,22 @@
+#!/bin/bash
+
+help_wanted() {
+    echo "$#"
+    echo "$@"
+    [ "$#" -eq 0 ] || [ "$#" -eq 1 ] && [ "$1" = "-h" ] || [ "$1" = "--help" ]
+    echo $?
+}
+
+usage() {
+    echo "Provide a path and this script will call 'ls -l' on all"
+    echo "Example: 'lsr foo/bar/baz'"
+}
+
+
+if help_wanted "$@"; then
+    echo "hello"
+    usage
+    exit 0;
+fi
+
+echo "done"
