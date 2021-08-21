@@ -8,6 +8,8 @@ if ! [[ $(lsb_release -i) =~ 'Ubuntu' || $(lsb_release -i) =~ 'Kali' ]]; then
     exit
 fi
 
+cd "$(dirname "$0")"
+
 mkdir -p ~/.config
 mkdir -p ~/.bin
 
