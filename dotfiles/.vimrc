@@ -324,7 +324,7 @@ augroup configgroup
     autocmd FileType haskell setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
     autocmd BufRead,BufNewFile *.md setlocal colorcolumn=0 filetype=markdown
     autocmd BufRead,BufNewFile *.txt setlocal colorcolumn=0 tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-    autocmd Filetype vim setlocal foldenable foldmethod=marker foldlevel=0
+    autocmd Filetype vim,tmux setlocal foldenable foldmethod=marker foldlevel=0
 augroup END
 
 " }}}
