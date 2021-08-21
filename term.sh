@@ -1,5 +1,11 @@
 #!/bin/bash
 
+sudo apt update
+sudo apt install \
+    dconf-editor \
+    uuid-runtime `# Needed by gnome-terminal settings` \
+    && echo Done installing tools || exit 1
+
 echo -e "Create a custom profile in gnome-terminal, so that we can create a onedark one. It can be empty but one needs to be manually created from UI first"
 echo "Edit > Preferences > Profile > + "
 gnome-terminal
