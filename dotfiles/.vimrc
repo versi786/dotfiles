@@ -1,7 +1,3 @@
-
-" using checkinstall https://help.ubuntu.com/community/CheckInstalet
-" dpkg -r vim -- to remove vim, why would you ever do this though
-
 " vim-plugged {{{
 set nocompatible              " be iMproved, required
 call plug#begin('~/.vim/plugged')
@@ -262,7 +258,8 @@ nnoremap ]q :cnext<CR>
 nnoremap ]x :cclose<CR>
 
 "Paste in visual mode without copying
-xnoremap p pgvy
+" xnoremap p pgvy
+vnoremap <leader>p "_dP
 
 nnoremap <leader>o :set paste!<CR>
 nnoremap <leader>h :set hlsearch!<CR>
@@ -414,14 +411,14 @@ nnoremap <C-p> :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap \ :Buffers<CR>
 
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:fzf_layout = { 'down': '~20%' }
 " }}}
 
 " ack.vim {{{
-if executable('ag')
-    let g:ackprg = 'ag --vimgrep'
+if executable('rg')
+    let g:ackprg = 'rg --vimgrep --smart-case'
 endif
+
 nnoremap <leader>w :Ack! "<cword>"<CR>
 nnoremap <leader>s :Ack! <Space>
 " }}}

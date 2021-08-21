@@ -212,7 +212,14 @@ PS1+="\[$COLOR_WHITE\] \n\$ "                       # Trailing $
 export HISTSIZE=2000
 
 
+# FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# --files: List files that would be searched but do not search
+# --hidden: Search hidden files and folders
+# --follow: Follow symlinks
+# --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+
 
 HISTCONTROL=ignoreboth:erasedups
 
@@ -233,6 +240,7 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export PATH="~/.local/bin:$PATH"
 
 export PATH="~/bin:$PATH"
+export PATH="~/.bin:$PATH"
 
 # rust
 . "$HOME/.cargo/env"

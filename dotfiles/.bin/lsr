@@ -1,22 +1,27 @@
 #!/bin/bash
-
-help_wanted() {
-    echo "$#"
-    echo "$@"
-    [ "$#" -eq 0 ] || [ "$#" -eq 1 ] && [ "$1" = "-h" ] || [ "$1" = "--help" ]
-    echo $?
-}
-
-usage() {
-    echo "Provide a path and this script will call 'ls -l' on all"
-    echo "Example: 'lsr foo/bar/baz'"
-}
-
-
-if help_wanted "$@"; then
-    echo "hello"
-    usage
-    exit 0;
+if [[ $1 == "--help" ]] || [[ $1 == "-h" ]] || [[ $# -ne 1 ]]; then
+    echo "Usage: $0 <path>"
+    exit
 fi
 
-echo "done"
+# Remove trailing slash
+P=$(echo "$1" | sed 's|/$||g')
+
+echo "Recursively listing \"$P\""
+echo
+
+echo "$P" | awk -F'/' '{
+    if ($0 ~ /^[/]/) {
+        CURR_PATH="/";
+        START=2
+        print CURR_PATH
+    } else {
+        CURR_PATH="";
+        START=1
+    }
+    for(i=START; i<=NF; i++) {
+        CURR_PATH=CURR_PATH $i;
+        print "\"" CURR_PATH "\""
+        CURR_PATH=CURR_PATH "/";
+    }
+}' | xargs ls -ld
