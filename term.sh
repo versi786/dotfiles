@@ -2,6 +2,7 @@
 
 sudo apt update
 sudo apt install \
+    dconf-cli \
     dconf-editor \
     uuid-runtime `# Needed by gnome-terminal settings` \
     && echo Done installing tools || exit 1
@@ -14,6 +15,7 @@ read -p "Press enter to continue"
 echo "Installing OneDark colorsheme"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/denysdovhan/gnome-terminal-one/master/one-dark.sh)"
 
+export TERMINAL=gnome-terminal
 echo "Install gruvbox dark"
 bash -c "$(wget -qO- https://git.io/vQgMr)"
 
