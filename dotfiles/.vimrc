@@ -30,7 +30,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/a.vim'
 " Plug 'tell-k/vim-autopep8'
 Plug 'rhysd/vim-clang-format'
-" Plug 'unblevable/quick-scope'
+Plug 'unblevable/quick-scope'
 
 " True color colorschemes
 Plug 'sjl/badwolf'
@@ -115,6 +115,7 @@ syntax on
 " }}}
 
 " gruvbox {{{
+let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
 let g:airline_theme='gruvbox'
 set background=dark
