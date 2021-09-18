@@ -58,7 +58,7 @@ let mapleader=',' " leader is comma
 set laststatus=2            " show whole status bar
 set noshowmode              " Airline does this for us
 " use powerline fonts
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 " Syntastic integration
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -115,7 +115,7 @@ syntax on
 " }}}
 
 " gruvbox {{{
-let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
 let g:airline_theme='gruvbox'
 set background=dark
@@ -258,7 +258,8 @@ nnoremap ]q :cnext<CR>
 nnoremap ]x :cclose<CR>
 
 "Paste in visual mode without copying
-xnoremap p pgvy
+" xnoremap p pgvy
+vnoremap <leader>p "_dP
 
 nnoremap <leader>o :set paste!<CR>
 nnoremap <leader>h :set hlsearch!<CR>
@@ -323,7 +324,7 @@ augroup configgroup
     autocmd FileType haskell setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
     autocmd BufRead,BufNewFile *.md setlocal colorcolumn=0 filetype=markdown
     autocmd BufRead,BufNewFile *.txt setlocal colorcolumn=0 tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-    autocmd Filetype vim setlocal foldenable foldmethod=marker foldlevel=0
+    autocmd Filetype vim,tmux setlocal foldenable foldmethod=marker foldlevel=0
 augroup END
 
 " }}}

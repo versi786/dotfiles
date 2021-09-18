@@ -1,5 +1,4 @@
 #!/bin/bash
-
 if [[ $1 == "--help" ]] || [[ $1 == "-h" ]] || [[ $# -ne 1 ]]; then
     echo "Usage: $0 <path>"
     exit
@@ -26,5 +25,3 @@ echo "$P" | awk -F'/' '{
         CURR_PATH=CURR_PATH "/";
     }
 }' | xargs ls -ld
-
-

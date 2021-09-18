@@ -8,6 +8,8 @@ if ! [[ $(lsb_release -i) =~ 'Ubuntu' || $(lsb_release -i) =~ 'Kali' ]]; then
     exit
 fi
 
+cd "$(dirname "$0")"
+
 mkdir -p ~/.config
 mkdir -p ~/.bin
 
@@ -16,7 +18,6 @@ sudo apt upgrade
 sudo apt install \
     curl \
     dconf-cli \
-    dconf-editor \
     gnome-terminal \
     neovim \
     nodejs \
@@ -27,10 +28,10 @@ sudo apt install \
     silversearcher-ag \
     stow \
     tmux \
-    uuid-runtime `# Needed by gnome-termina settings` \
+    uuid-runtime `# Needed by gnome-terminal settings` \
     vim \
     xclip \
-    && echo Done installing programs || exit
+    && echo Done installing programs || exit 1
 
 
 if ! command -v stow &> /dev/null
@@ -43,9 +44,11 @@ fi
 # this will create a symlink in ~ to files in ./dotfiles
 stow -v -t ~ dotfiles || exit
 
-echo installing vim-plug
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if [[ ! -f ~/.vim/autoload/plug.vim ]]; then
+    echo installing vim-plug
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
 
 # echo "Installing TPM"
 # git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -56,20 +59,22 @@ echo "Installing plugins"
 vim +PlugInstall +CocInstall +qall
 nvim +PlugInstall +CocInstall +qall
 
-if [[ -d "~/.fzf" ]]; then
+if [[ ! -d ~/.fzf ]]; then
     echo install fzf
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install
 fi
 
-echo "Installing powerline fonts"
-# clone
-git clone https://github.com/powerline/fonts.git --depth=1
-# install
-cd ./fonts
-./install.sh
-# clean-up a bit
-cd ..
-rm -rf ./fonts
+if  ! fc-list | grep Powerline -q; then
+    echo "Installing powerline fonts"
+    # clone
+    git clone https://github.com/powerline/fonts.git --depth=1
+    # install
+    cd ./fonts
+    ./install.sh
+    # clean-up a bit
+    cd ..
+    rm -rf ./fonts
+fi
 
 echo "If you want to set up terminal run ./term.sh"
