@@ -19,6 +19,7 @@ sudo apt install \
     curl \
     dconf-cli \
     gnome-terminal \
+    exuberant-ctags \
     neovim \
     nodejs \
     npm \
