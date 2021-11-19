@@ -30,7 +30,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/a.vim'
 " Plug 'tell-k/vim-autopep8'
 Plug 'rhysd/vim-clang-format'
-" Plug 'unblevable/quick-scope'
+Plug 'unblevable/quick-scope'
 
 " True color colorschemes
 Plug 'sjl/badwolf'
