@@ -3,34 +3,37 @@ set nocompatible              " be iMproved, required
 call plug#begin('~/.vim/plugged')
 
 " add plugins after this line
+" Plug 'tell-k/vim-autopep8'
+Plug 'SirVer/ultisnips'
+Plug 'Valloric/MatchTagAlways'
 Plug 'airblade/vim-gitgutter'
 Plug 'alvan/vim-closetag'
 Plug 'benmills/vimux'
+Plug 'cespare/vim-toml', { 'branch': 'main' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'honza/vim-snippets'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
-Plug 'nbouscal/vim-stylish-haskell'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
+Plug 'nbouscal/vim-stylish-haskell'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
+Plug 'rhysd/vim-clang-format'
 Plug 'rust-lang/rust.vim'
-Plug 'SirVer/ultisnips'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'unblevable/quick-scope'
 Plug 'urso/haskell_syntax.vim'
-Plug 'Valloric/MatchTagAlways'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/a.vim'
-" Plug 'tell-k/vim-autopep8'
-Plug 'rhysd/vim-clang-format'
-Plug 'unblevable/quick-scope'
 
 " True color colorschemes
 Plug 'sjl/badwolf'
@@ -40,9 +43,6 @@ Plug 'morhetz/gruvbox'
 Plug 'nanotech/jellybeans.vim'
 Plug 'crusoexia/vim-monokai'
 
-" Code Completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 " Graveyard
 " Plug 'vim-syntastic/syntastic'
@@ -163,7 +163,7 @@ set backspace=indent,eol,start
 " }}}
 
 " UI Config {{{
-set number "  relativenumber   " show line numbers, and relative
+set number relativenumber   " show line numbers, and relative
 set showcmd                 " show command in bottom bar (hidden by Airline)
 set cursorline              " highlight current line
 "hi CursorLine term=bold cterm=bold guibg=Grey40
