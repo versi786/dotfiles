@@ -3,7 +3,6 @@ set nocompatible              " be iMproved, required
 call plug#begin('~/.vim/plugged')
 
 " add plugins after this line
-" Plug 'tell-k/vim-autopep8'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/MatchTagAlways'
 Plug 'airblade/vim-gitgutter'
@@ -163,7 +162,7 @@ set backspace=indent,eol,start
 " }}}
 
 " UI Config {{{
-set number relativenumber   " show line numbers, and relative
+set number " relativenumber   " show line numbers, and relative
 set showcmd                 " show command in bottom bar (hidden by Airline)
 set cursorline              " highlight current line
 "hi CursorLine term=bold cterm=bold guibg=Grey40
