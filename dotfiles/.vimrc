@@ -305,7 +305,10 @@ augroup END
 fun! <SID>StripTrailingWhitespace()
         let l = line(".")
         let c = col(".")
+        " strip spaces at end of line
         %s/\s\+$//e
+        " strip newline at end of file
+        %s#\($\n\s*\)\+\%$##e
         call cursor(l, c)
 endfun
 
