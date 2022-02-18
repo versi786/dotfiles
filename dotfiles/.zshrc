@@ -194,3 +194,5 @@ if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+-e 
+if [ -e /home/av/.nix-profile/etc/profile.d/nix.sh ]; then . /home/av/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

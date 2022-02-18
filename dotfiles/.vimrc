@@ -3,6 +3,8 @@ set nocompatible              " be iMproved, required
 call plug#begin('~/.vim/plugged')
 
 " add plugins after this line
+" Plug 'SirVer/ultisnips'
+Plug 'Valloric/MatchTagAlways'
 Plug 'airblade/vim-gitgutter'
 Plug 'alvan/vim-closetag'
 Plug 'benmills/vimux'
@@ -13,24 +15,22 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
-Plug 'nbouscal/vim-stylish-haskell'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
+Plug 'nbouscal/vim-stylish-haskell'
 Plug 'pangloss/vim-javascript'
+Plug 'rhysd/vim-clang-format'
 Plug 'rust-lang/rust.vim'
-Plug 'SirVer/ultisnips'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'urso/haskell_syntax.vim'
-Plug 'Valloric/MatchTagAlways'
+Plug 'tpope/vim-unimpaired'
+Plug 'unblevable/quick-scope'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/a.vim'
-" Plug 'tell-k/vim-autopep8'
-Plug 'rhysd/vim-clang-format'
-Plug 'unblevable/quick-scope'
 
 " True color colorschemes
 Plug 'sjl/badwolf'
@@ -253,8 +253,8 @@ nnoremap <leader>eb :e ~/.bash_profile<CR>
 nnoremap <leader>et :e ~/.tmux.conf<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
-nnoremap [q :cprev<CR>
-nnoremap ]q :cnext<CR>
+nnoremap [l :cprev<CR>
+nnoremap ]l :cnext<CR>
 nnoremap ]x :cclose<CR>
 
 "Paste in visual mode without copying
@@ -478,9 +478,9 @@ nnoremap <leader>vq :VimuxCloseRunner<CR>
 " }}}
 
 " Ultisnips {{{
-let g:UltiSnipsExpandTrigger = '<C-e>'
-let g:UltiSnipsJumpForwardTrigger = '<C-e>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-f>'
+" let g:UltiSnipsExpandTrigger = '<C-e>'
+" let g:UltiSnipsJumpForwardTrigger = '<C-e>'
+" let g:UltiSnipsJumpBackwardTrigger = '<C-f>'
 " }}}
 
 " MatchTagAlways {{{
@@ -510,7 +510,7 @@ let g:clang_format#style_options = {
             \ "BinPackParameters": "false"}
 " }}}
 
-"coc {{{
+"coc.nvim {{{
 let g:coc_global_extensions = [
 \ 'coc-clangd',
 \ 'coc-css',
@@ -523,9 +523,14 @@ let g:coc_global_extensions = [
 \ 'coc-tslint-plugin',
 \ 'coc-tsserver',
 \ 'coc-yaml',
+\ 'coc-rust-analyzer'
 \ ]
 
 " Below is the default coc.nvim config from github
+" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
+" unicode characters in the file autoload/float.vim
+set encoding=utf-8
+
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -545,12 +550,12 @@ set shortmess+=c
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
-" if has("patch-8.1.1564")
-"   " Recently vim can merge signcolumn and number column into one
-"   set signcolumn=number
-" else
-"   set signcolumn=yes
-" endif
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -573,14 +578,10 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -599,8 +600,10 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
   else
-    call CocAction('doHover')
+    execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
 
@@ -617,7 +620,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType javascript,typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
@@ -643,8 +646,18 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
 " Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of LS, ex: coc-tsserver
+" Requires 'textDocument/selectionRange' support of language server.
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
 
@@ -655,7 +668,7 @@ command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
