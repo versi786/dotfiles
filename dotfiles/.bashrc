@@ -143,7 +143,7 @@ alias rm="rm -i"
 alias sz="du --max-depth=1 -h . | sort -n -r"
 alias tl="tail -f ./*log*"
 alias vi="vim -u ~/.vimrc_simple"
-alias vim="nvim"
+#alias vim="nvim"
 
 # try to get UTF-8 Support
 export LANG=en_US.UTF-8
