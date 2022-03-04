@@ -43,7 +43,7 @@ fi
 
 # Stow will exit with error if it is going to overwrite an existing file
 # this will create a symlink in ~ to files in ./dotfiles
-stow -v -t ~ dotfiles || exit
+./stow_files.sh || exit
 
 if [[ ! -f ~/.vim/autoload/plug.vim ]]; then
     echo installing vim-plug
