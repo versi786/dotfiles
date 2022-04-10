@@ -58,7 +58,7 @@ fi
 # ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 
 echo "Installing plugins"
-vim +PlugInstall +CocInstall +qall
+vim +PlugInstall +CocInsall +qall
 nvim +PlugInstall +CocInstall +qall
 
 if [[ ! -d ~/.fzf ]]; then
@@ -67,16 +67,14 @@ if [[ ! -d ~/.fzf ]]; then
     ~/.fzf/install
 fi
 
-if  ! fc-list | grep Powerline -q; then
-    echo "Installing powerline fonts"
+if  ! fc-list | grep 'Nerd Font' -q; then
+    echo "Installing nerd fonts"
     # clone
-    git clone https://github.com/powerline/fonts.git --depth=1
-    # install
-    cd ./fonts
-    ./install.sh
-    # clean-up a bit
-    cd ..
-    rm -rf ./fonts
+    git clone git@github.com:ryanoasis/nerd-fonts.git --depth=1
+    cd ./nerd-fonts
+    ./install.sh DejaVuSansMono
+    cd ../
+    rm -rf ./nerd-fonts
 fi
 
 echo "If you want to set up terminal run ./term.sh"
