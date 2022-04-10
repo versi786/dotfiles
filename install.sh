@@ -32,6 +32,7 @@ sudo apt install \
     uuid-runtime `# Needed by gnome-terminal settings` \
     vim \
     xclip \
+    zsh \
     && echo Done installing programs || exit 1
 
 
