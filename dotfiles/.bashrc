@@ -178,7 +178,7 @@ git_color() {
 last_status() {
     local status="$?"
     if [[ $status -gt 128 ]]; then
-        local signal_str=" $(expr "$status" - 128)"
+        local signal_str="signal $(expr "$status" - 128)"
     fi
     if [[ "$status" != 0 ]]; then
         echo -e "$COLOR_RED[✘ ${status}${signal_str}]$NC"
