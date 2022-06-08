@@ -52,6 +52,8 @@ if has('nvim')
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'saadparwaiz1/cmp_luasnip'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/nvim-treesitter-context'
 endif
 " }}}
 
