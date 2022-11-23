@@ -12,7 +12,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'honza/vim-snippets'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
@@ -149,9 +149,10 @@ set termguicolors
     "colorscheme jellybeans
     " }}}
 
-    " monokai {{{
-    "colorscheme monokai
-    " }}}
+" monokai {{{
+" colorscheme monokai
+" set termguicolors
+" }}}
 
 
 
@@ -199,7 +200,7 @@ set showmatch               " highlight matching [{()}]
 
 set wrap                      " wrap lines
 "set linebreak                " break over-long lines
-" set textwidth=80            " enforce 80 characters
+set textwidth=80            " enforce 80 characters
 
 " kill backups
 set nobackup
