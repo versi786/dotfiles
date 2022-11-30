@@ -1,2 +1,5 @@
 "\C-s": nop
 "\C-q": nop
+# By default, completions are not highlighted in color.
+set colored-stats on
+set colored-completion-prefix on
