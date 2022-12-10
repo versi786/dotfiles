@@ -271,8 +271,10 @@ nnoremap <leader>eb :e ~/.bash_profile<CR>
 nnoremap <leader>et :e ~/.tmux.conf<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
+" Quickfix Helpers
 nnoremap [l :cprev<CR>
 nnoremap ]l :cnext<CR>
+nnoremap [x :copen<CR>
 nnoremap ]x :cclose<CR>
 
 "Paste in visual mode without copying
