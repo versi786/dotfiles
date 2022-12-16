@@ -272,8 +272,8 @@ nnoremap <leader>et :e ~/.tmux.conf<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Quickfix Helpers
-nnoremap [l :cprev<CR>
-nnoremap ]l :cnext<CR>
+nnoremap [l :cprev<CR>zz
+nnoremap ]l :cnext<CR>zz
 nnoremap [x :copen<CR>
 nnoremap ]x :cclose<CR>
 
@@ -283,6 +283,9 @@ vnoremap <leader>p "_dP
 
 nnoremap <leader>o :set paste!<CR>
 nnoremap <leader>h :set hlsearch!<CR>
+
+" search/replace for current word
+nnoremap <leader>r :%s/<C-r><C-w>/<C-r><C-w>/g<left><left>
 
 " :W will make dirs if necessary
 fun! WriteCreatingDirs()
@@ -299,7 +302,6 @@ for tab_number in [1,2,3,4, 5, 6]
 endfor
 
 noremap <leader>nt :tabnew<cr>
-noremap <leader>t :tabnext<cr>
 nnoremap <leader>ct :tabclose<cr>
 " }}}
 
