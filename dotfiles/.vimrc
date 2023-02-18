@@ -724,14 +724,3 @@ let g:AutoPairsCenterLine = 0
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " }}}
-
-" teleseope {{{
-lua << EOF
-require('telescope').load_extension('fzf')
-EOF
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-" }}}
