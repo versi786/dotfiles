@@ -54,6 +54,8 @@ if has('nvim')
     Plug 'saadparwaiz1/cmp_luasnip'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/nvim-treesitter-context'
+    Plug 'nvim-tree/nvim-web-devicons'
+    Plug 'folke/trouble.nvim'
 endif
 " }}}
 
