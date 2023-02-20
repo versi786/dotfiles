@@ -10,6 +10,7 @@ Plug 'cespare/vim-toml', { 'branch': 'main' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'honza/vim-snippets'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
@@ -24,8 +25,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'unblevable/quick-scope'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/a.vim'
 
 " color colorschemes
@@ -55,34 +54,8 @@ call plug#end()
 let mapleader=',' " leader is comma
 " }}}
 
-" Airline {{{
-set laststatus=2            " show whole status bar
-set noshowmode              " Airline does this for us
-" use powerline fonts
-let g:airline_powerline_fonts = 0
-" Syntastic integration
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 1
-" }}}
-
-" Colors and GVim {{{
-" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-" set termguicolors
-
+" colors {{{
 syntax on
-    " Solarized Settings {{{
-    " colorscheme solarized8_light
-    " let g:airline_theme='solarized'
-    " }}}
-
-" One Dark Settings {{{
-" colorscheme onedark
-" let g:airline_theme='onedark'
-" set t_ut= " force redraw of background color, different from terminal background
-" }}}
-
 " gruvbox {{{
 let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
@@ -90,27 +63,6 @@ let g:airline_theme='gruvbox'
 set background=dark
 set termguicolors
 " }}}
-
-    " badwolf {{{
-    "colorscheme badwolf
-    "let g:airline_theme='badwolf'
-    " }}}
-
-    " base16 {{{
-    "colorscheme base16-default-dark
-    " }}}
-
-    " jellybeans {{{
-    "colorscheme jellybeans
-    " }}}
-
-" monokai {{{
-" colorscheme monokai
-" set termguicolors
-" }}}
-
-
-
 " }}}
 
 " spaces and tabs {{{
@@ -125,7 +77,7 @@ filetype plugin on
 set autoindent              " auto indent
 set smartindent             " smart indent
 
-set listchars=tab:>-,extends:>,precedes:<,trail:·  " eol:¶,
+set listchars=tab:>-,extends:>,precedes:<,trail:·,space:·  " eol:¶,
 set list                    " make tab characters very obvious
 set conceallevel=0
 " make backspace unstupid: erase autoindents, join lines
@@ -175,8 +127,49 @@ set scrolloff=5
 " Show completion menu and do not select anything by default
 set completeopt=menu,menuone,noselect
 
+" More completion
+set wildmenu    " visual autocompelte for commandline menu
+set wildmode=longest,lsit " bash-like tab completion
+set path+=**              " search down into sub folders for file tasks
+                          " use :find to search
+
 " Used by lsp for formatting
 nmap <C-f> <Nop>
+
+" Search for selected text, forwards or backwards.
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gVzv:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gVzv:call setreg('"', old_reg, old_regtype)<CR>
+" }}}
+
+" lightline {{{
+set laststatus=2
+set noshowmode
+function! MyLineInfo() abort
+    return line('.') . '/' . line('$')
+endfunction
+
+let g:lightline = {
+    \ 'colorscheme': 'gruvbox',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ],
+    \   'right': [ [ 'lineinfo' ], ['precent', 'mylineinfo' ], ['fileformat', 'fileencoding', 'filetype' ] ],
+    \ },
+    \ 'inactive': {
+    \   'left': [ [ 'relativepath' ] ],
+    \   'right': [ [ 'lineinfo' ], ['percent', 'mylineinfo'] ],
+    \ },
+    \ 'component_function': {
+    \   'mylineinfo': 'MyLineInfo',
+    \ }
+    \ }
 " }}}
 
 " search {{{
@@ -445,4 +438,8 @@ let g:AutoPairsCenterLine = 0
 " quick-scope {{{
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+" }}}
+
+" Tagbar {{{
+set complete-=t " tagbar makes 'tags' huge and completion slow
 " }}}
