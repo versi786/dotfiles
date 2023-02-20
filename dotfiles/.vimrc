@@ -97,7 +97,7 @@ set modelines=5
 set modeline
 
 set wildmenu                " visual autocomplete for command menu
-set wildmode=longest,list                " bash-like tab completion
+"set wildmode=longest,list                " bash-like tab completion
 set path+=**                " seach down into sub folders for file tasks
                             " use :find to search
 "set lazyredraw             " only redraw when we need to
@@ -129,12 +129,6 @@ set scrolloff=5
 
 " Show completion menu and do not select anything by default
 set completeopt=menu,menuone,noselect
-
-" More completion
-set wildmenu    " visual autocompelte for commandline menu
-set wildmode=longest,lsit " bash-like tab completion
-set path+=**              " search down into sub folders for file tasks
-                          " use :find to search
 
 " Used by lsp for formatting
 nmap <C-f> <Nop>
