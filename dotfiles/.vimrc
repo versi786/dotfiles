@@ -78,6 +78,9 @@ set autoindent              " auto indent
 set smartindent             " smart indent
 
 set listchars=tab:>-,extends:>,precedes:<,trail:·,space:·  " eol:¶,
+" highlight trailing spaces in red
+highlight ExtraWhitespace ctermbg=darkred guibg=darkred
+match ExtraWhitespace /\s\+$/
 set list                    " make tab characters very obvious
 set conceallevel=0
 " make backspace unstupid: erase autoindents, join lines
