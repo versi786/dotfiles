@@ -219,6 +219,9 @@ set scrolloff=5
 
 " Show completion menu and do not select anything by default
 set completeopt=menu,menuone,noselect
+
+" Used by lsp for formatting
+nmap <C-f> <Nop>
 " }}}
 
 " search {{{

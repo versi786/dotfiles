@@ -104,7 +104,7 @@ cmp.setup({
       { "i", "c" }
     ),
 
-    ["<c-space>"] = cmp.mapping {
+    ["<C-space>"] = cmp.mapping {
       i = cmp.mapping.complete(),
       c = function(
         _ --[[fallback]]
