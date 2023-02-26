@@ -63,7 +63,9 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
-  nmap('<C-f>', vim.lsp.buf.format, 'Format current buffer')
+  nmap('<C-f>', function(_)
+    vim.lsp.buf.format()
+  end, 'Format current buffer')
 end
 
   -- Setup nvim-cmp.
