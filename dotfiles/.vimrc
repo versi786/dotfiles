@@ -33,17 +33,18 @@ Plug 'morhetz/gruvbox'
 " neovim plugins {{{
 if has('nvim')
     Plug 'L3MON4D3/LuaSnip'
+    Plug 'folke/trouble.nvim'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/nvim-cmp'
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     Plug 'nvim-telescope/telescope.nvim'
-    Plug 'saadparwaiz1/cmp_luasnip'
+    Plug 'nvim-tree/nvim-web-devicons'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/nvim-treesitter-context'
-    Plug 'nvim-tree/nvim-web-devicons'
-    Plug 'folke/trouble.nvim'
+    Plug 'ray-x/lsp_signature.nvim'
+    Plug 'saadparwaiz1/cmp_luasnip'
 endif
 " }}}
 
