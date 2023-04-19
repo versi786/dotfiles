@@ -231,6 +231,11 @@ for _, lsp in pairs(servers) do
 end
 -- }}}
 
+-- lsp_signature.nvim {{{
+local cfg = {}  -- add your config here
+require "lsp_signature".setup(cfg)
+-- }}}
+
 -- treesitter {{{
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
