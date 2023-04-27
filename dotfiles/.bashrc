@@ -240,10 +240,10 @@ export PATH="$HOME/gems/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
 # pip install --user
-export PATH="~/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
-export PATH="~/bin:$PATH"
-export PATH="~/.bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.bin:$PATH"
 
 # rust
 . "$HOME/.cargo/env"
@@ -251,3 +251,5 @@ export PATH="~/.bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+alias luamake=/home/av/Documents/proj/lua-language-server/3rd/luamake/luamake
