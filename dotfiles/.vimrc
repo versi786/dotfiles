@@ -45,6 +45,7 @@ if has('nvim')
     Plug 'nvim-treesitter/nvim-treesitter-context'
     Plug 'ray-x/lsp_signature.nvim'
     Plug 'saadparwaiz1/cmp_luasnip'
+    Plug 'simrat39/rust-tools.nvim'
 endif
 " }}}
 
@@ -440,4 +441,11 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " Tagbar {{{
 set complete-=t " tagbar makes 'tags' huge and completion slow
+" }}}
+
+" Sneak {{{
+nnoremap f <Plug>Sneak_f
+nnoremap F <Plug>Sneak_F
+nnoremap t <Plug>Sneak_t
+nnoremap T <Plug>Sneak_T
 " }}}
