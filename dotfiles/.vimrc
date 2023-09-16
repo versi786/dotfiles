@@ -11,6 +11,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
+Plug 'jpalardy/vim-slime'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
@@ -195,7 +196,6 @@ nnoremap E $
 " Windows and Tabs {{{
 set splitbelow              " new hoz splits go below
 set splitright              " new vrt splits go right
-nnoremap <silent> vv :vsp<CR>
 
 " move between windows sensibly
 nmap <C-j> <C-w>j
@@ -246,6 +246,8 @@ fun! WriteCreatingDirs()
     redraw!
 endfunction
 command! W call WriteCreatingDirs()
+
+nnoremap vv ggVG
 " }}}
 
 " Tabs {{{
@@ -317,6 +319,7 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 " nerdTree {{{
 nnoremap <silent> <leader>f :NERDTreeToggle<cr>
+nnoremap <silent> <leader>r :NERDTreeFind<cr>
 " }}}
 
 " Backups {{{
@@ -448,4 +451,11 @@ nnoremap f <Plug>Sneak_f
 nnoremap F <Plug>Sneak_F
 nnoremap t <Plug>Sneak_t
 nnoremap T <Plug>Sneak_T
+" }}}
+
+" vim-slime {{{
+let g:slime_target = "tmux"
+let g:slime_paste_file = expand("$HOME/.slime_paste")
+let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
+let g:slime_dont_ask_default = 1
 " }}}
