@@ -14,7 +14,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'jpalardy/vim-slime'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-sneak'
+" Plug 'justinmk/vim-sneak'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
 Plug 'pangloss/vim-javascript'
@@ -297,7 +297,7 @@ augroup END
 augroup configgroup
     autocmd!
     autocmd FileType make setlocal noexpandtab
-    autocmd FileType c,h,html,css  setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd FileType c,h,html,css  setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
     autocmd FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     autocmd FileType verilog setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     autocmd FileType haskell setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
@@ -447,10 +447,10 @@ set complete-=t " tagbar makes 'tags' huge and completion slow
 " }}}
 
 " Sneak {{{
-nnoremap f <Plug>Sneak_f
-nnoremap F <Plug>Sneak_F
-nnoremap t <Plug>Sneak_t
-nnoremap T <Plug>Sneak_T
+" nnoremap f <Plug>Sneak_f
+" nnoremap F <Plug>Sneak_F
+" nnoremap t <Plug>Sneak_t
+" nnoremap T <Plug>Sneak_T
 " }}}
 
 " vim-slime {{{
