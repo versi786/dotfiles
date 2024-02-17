@@ -113,7 +113,7 @@ set showmatch               " highlight matching [{()}]
 
 set wrap                      " wrap lines
 "set linebreak                " break over-long lines
-set textwidth=80            " enforce 80 characters
+" set textwidth=80            " enforce 80 characters
 
 " kill backups
 set nobackup
