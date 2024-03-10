@@ -43,8 +43,20 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		-- do as well as how to actually do it!
 
 		-- [[ Configure Telescope ]]
+		--
+		local telescope = require("telescope")
+		local telescopeConfig = require("telescope.config")
+
+		-- Clone the default Telescope configuration
+		local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
+
+		-- I want to search in hidden/dot files.
+		table.insert(vimgrep_arguments, "--hidden")
+		-- I don't want to search in the `.git` directory.
+		table.insert(vimgrep_arguments, "--glob")
+		table.insert(vimgrep_arguments, "!**/.git/*")
 		-- See `:help telescope` and `:help telescope.setup()`
-		require("telescope").setup({
+		telescope.setup({
 			-- You can put your default mappings / updates / etc. in here
 			--  All the info you're looking for is in `:help telescope.setup()`
 			--
@@ -54,6 +66,16 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			--   },
 			-- },
 			-- pickers = {}
+			defaults = {
+				-- `hidden = true` is not supported in text grep commands.
+				vimgrep_arguments = vimgrep_arguments,
+			},
+			pickers = {
+				find_files = {
+					-- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+					find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+				},
+			},
 			extensions = {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown(),
@@ -70,7 +92,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		vim.keymap.set("n", "<space>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 		vim.keymap.set("n", "<space>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
 		vim.keymap.set("n", "<space>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-		vim.keymap.set("n", "<space>st", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
+		vim.keymap.set("n", "<space>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 		vim.keymap.set("n", "<space>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 		vim.keymap.set("n", "<space>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
 		vim.keymap.set("n", "<space>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
