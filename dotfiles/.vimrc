@@ -30,7 +30,7 @@ Plug 'vim-scripts/a.vim'
 
 " color colorschemes
 Plug 'morhetz/gruvbox'
-"
+
 " neovim plugins {{{
 if has('nvim')
     Plug 'L3MON4D3/LuaSnip'

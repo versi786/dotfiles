@@ -43,8 +43,8 @@ vim.opt.smartcase = true
 vim.opt.signcolumn = "auto"
 
 -- Decrease update time
--- vim.opt.updatetime = 250
--- vim.opt.timeoutlen = 300
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 300
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -91,3 +91,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+-- " Show completion menu and do not select anything by default
+vim.opt.completeopt = "menu,menuone,noselect"
+
+-- make backspace unstupid: erase autoindents, join lines
+vim.opt.backspace = "indent,eol,start"
