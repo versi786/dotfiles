@@ -1,5 +1,15 @@
+
+# Disable freezing screen
 "\C-s": nop
 "\C-q": nop
+
 # By default, completions are not highlighted in color.
 set colored-stats on
 set colored-completion-prefix on
+
+# Make Tab autocomplete regardless of filename case
+set completion-ignore-case on
+
+# List all matches in case multiple possible completions are possible
+set show-all-if-ambiguous on
+

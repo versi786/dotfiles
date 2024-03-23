@@ -6,7 +6,7 @@ return {
 		},
 	},
 	build = function()
-		vim.fn["fzf#install"]({})
+		vim.fn["fzf#install"]()
 	end,
 	keys = {
 		{ "<C-p>", ":Files<CR>" },
