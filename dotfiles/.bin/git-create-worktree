@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # https://github.com/nicknisi/dotfiles/blob/main/bin/git-create-worktree
-
+set -x
 # This script should help facilitate setting up a new worktree, including:
 
 # - creating a new worktree
@@ -24,8 +24,8 @@ Available options:
 -h, --help                    Print this help and exit
 -v, --verbose                 Print script debug info
 -b, --branch                  The branch to create
--B, --base                    The branch to use as the base for the new worktree (default: main)
--p, --prefix                  The prefix to apply to the branch name (default: $(git config github.user)/)
+-B, --base                    The branch to use as the base for the new worktree (default: main or master)
+-p, --prefix                  The prefix to apply to the branch name (default: feature/$(git config github.user)/)
 -N, --no-create-upstream      Do not create an upstream branch
 
 
@@ -114,8 +114,13 @@ run_command() {
 parse_params() {
   # default values of variables set from params
   create_upstream=1
-  prefix="$(git config github.user)/"
-  base='origin/main'
+  prefix="feature/$(git config github.user)/"
+  echo hello
+  if git rev-parse --verify origin/master &>/dev/null; then
+    base="origin/master"
+  else
+    base="origin/main"
+  fi
   branch=''
 
   while :; do

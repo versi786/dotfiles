@@ -2,6 +2,10 @@
 	email = versi786@gmail.com
 	name = Aasif Versi
 
+[github]
+	user = versi786
+# Lots of config from https://github.com/jessfraz/dotfiles/blob/master/.gitignore
+
 [alias]
 
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
@@ -130,4 +134,6 @@
 	autoSetupRemote = true
 [rerere]
 	enabled = true
-# Lots of config from https://github.com/jessfraz/dotfiles/blob/master/.gitignore
+
+[rebase]
+	autosquash = true
