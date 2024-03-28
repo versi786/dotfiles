@@ -128,5 +128,6 @@
 	# change to maching for machines with older versions of git 1.x.x
 	default = simple
 	autoSetupRemote = true
-
+[rerere]
+	enabled = true
 # Lots of config from https://github.com/jessfraz/dotfiles/blob/master/.gitignore
