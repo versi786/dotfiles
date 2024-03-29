@@ -36,6 +36,9 @@ sudo apt install \
     && echo Done installing programs || exit 1
 
 
+curl https://sh.rustup.rs -sSf | sh
+cargo install zoxide --locked
+
 if ! command -v stow &> /dev/null
 then
     echo "stow could not be found"
