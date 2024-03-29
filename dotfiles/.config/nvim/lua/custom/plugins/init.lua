@@ -4,5 +4,4 @@ return {
 	{ "morhetz/gruvbox" },
 	{ "numToStr/Comment.nvim" },
 	{ "vim-scripts/a.vim" },
-	{ "vim-scripts/a.vim" },
 }

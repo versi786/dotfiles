@@ -97,3 +97,17 @@ vim.opt.completeopt = "menu,menuone,noselect"
 
 -- make backspace unstupid: erase autoindents, join lines
 vim.opt.backspace = "indent,eol,start"
+
+-- Indentation
+vim.opt.tabstop = 4 -- number of visual spaces per TAB
+vim.opt.softtabstop = 4 -- number of spaces inserted/deleted while editing
+vim.opt.expandtab = true -- tabs are spaces
+vim.opt.shiftwidth = 4 -- an indent is 4 spaces
+vim.opt.shiftround = true -- round to nearest multiple of shiftwidth
+vim.opt.autoindent = true -- auto indent
+vim.opt.smartindent = true -- smart indent
+
+-- No backups
+vim.opt.backup = false
+vim.opt.wb = false
+vim.opt.swapfile = false
