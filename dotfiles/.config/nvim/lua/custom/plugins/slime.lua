@@ -1,9 +1,5 @@
 return {
 	"jpalardy/vim-slime",
-	keys = {
-		{ "<C-p>", ":Files<CR>" },
-		{ "\\", ":Buffers<CR>" },
-	},
 	config = function()
 		vim.g.slime_target = "tmux"
 		vim.g.slime_paste_file = vim.fn.expand("$HOME/.slime_paste")
