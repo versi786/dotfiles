@@ -18,8 +18,9 @@ sudo apt upgrade
 sudo apt install \
     curl \
     dconf-cli \
-    gnome-terminal \
     exuberant-ctags \
+    fd-find \
+    gnome-terminal \
     neovim \
     nodejs \
     npm \
