@@ -1,5 +1,5 @@
 return {
-	{ "airblade/vim-gitgutter" },
+	{ "lewis6991/gitsigns.nvim", config = true },
 	-- { "editorconfig/editorconfig-vim" },
 	{ "morhetz/gruvbox" },
 	{ "numToStr/Comment.nvim" },
