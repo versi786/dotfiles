@@ -188,6 +188,7 @@ last_status() {
 }
 ######### PS1 ################################################################
 PS1=""
+PS1+="\$VIRTUAL_ENV_PROMPT"                         # Status of last command
 PS1+="\[\$(last_status) \]"                         # Status of last command
 PS1+="\[$COLOR_PURPLE\]\t\[$NC\]"                   # Time
 PS1+="-\[$COLOR_BLUE\]\u\[$NC\]"                    # User
@@ -261,3 +262,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 alias luamake=/home/av/Documents/proj/lua-language-server/3rd/luamake/luamake
+
+_direnv_hook() {
+  local previous_exit_status=$?;
+  trap -- '' SIGINT;
+  eval "$("/usr/bin/direnv" export bash)";
+  trap - SIGINT;
+  return $previous_exit_status;
+};
+if ! [[ "${PROMPT_COMMAND:-}" =~ _direnv_hook ]]; then
+  PROMPT_COMMAND="_direnv_hook${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
+fi
+
