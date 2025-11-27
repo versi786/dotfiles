@@ -2,8 +2,11 @@ return { -- LSP Configuration & Plugins
 	"neovim/nvim-lspconfig",
 	dependencies = {
 		-- Automatically install LSPs and related tools to stdpath for neovim
-		"williamboman/mason.nvim",
-		"williamboman/mason-lspconfig.nvim",
+		-- https://github.com/nvim-lua/kickstart.nvim/pull/1475
+		{ "mason-org/mason.nvim", opts = {}, version = "^1.0.0" },
+		{ "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
+		-- "williamboman/mason.nvim",
+		-- "williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 
 		-- Useful status updates for LSP.
@@ -117,23 +120,26 @@ return { -- LSP Configuration & Plugins
 				-- capabilities = {},
 				settings = {
 					Lua = {
-						runtime = { version = "LuaJIT" },
-						workspace = {
-							checkThirdParty = false,
-							-- Tells lua_ls where to find all the Lua files that you have loaded
-							-- for your neovim configuration.
-							library = {
-								"${3rd}/luv/library",
-								unpack(vim.api.nvim_get_runtime_file("", true)),
+						runtime = {
+							-- Tell the language server which version of Lua you're using
+							-- (most likely LuaJIT in the case of Neovim)
+							version = "LuaJIT",
+						},
+						diagnostics = {
+							-- Get the language server to recognize the `vim` global
+							globals = {
+								"vim",
+								"require",
 							},
-							-- If lua_ls is really slow on your computer, you can try this instead:
-							-- library = { vim.env.VIMRUNTIME },
 						},
-						completion = {
-							callSnippet = "Replace",
+						workspace = {
+							-- Make the server aware of Neovim runtime files
+							library = vim.api.nvim_get_runtime_file("", true),
 						},
-						-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-						-- diagnostics = { disable = { 'missing-fields' } },
+						-- Do not send telemetry data containing a randomized but unique identifier
+						telemetry = {
+							enable = false,
+						},
 					},
 				},
 			},

@@ -1,6 +1,6 @@
 return {
 	{ "lewis6991/gitsigns.nvim", config = true },
-	-- { "editorconfig/editorconfig-vim" },
+	{ "editorconfig/editorconfig-vim" },
 	{ "morhetz/gruvbox" },
 	{ "numToStr/Comment.nvim" },
 	{ "tpope/vim-sleuth" },

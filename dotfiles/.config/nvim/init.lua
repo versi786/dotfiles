@@ -1,3 +1,4 @@
+-- Heavily inspired by: https://github.com/nvim-lua/kickstart.nvim
 require("custom.config")
 require("custom.shortcuts")
 
@@ -10,7 +11,9 @@ local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
 	vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-end ---@diagnostic disable-next-line: undefined-field
+end
+
+-- @diagnostic disable-next-line: undefined-field undefined-global
 vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
