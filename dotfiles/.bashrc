@@ -212,7 +212,7 @@ PS1+="\[$COLOR_WHITE\] \n\$ "                       # Trailing $
 # refresh history before each command to get commands written in other terms
 # export HISTCONTROL=ignoreboth:erasedups
 # shopt -s histappend
-# PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 export HISTSIZE=2000
 
 

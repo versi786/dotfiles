@@ -1,5 +1,5 @@
 return {
-	{ "lewis6991/gitsigns.nvim", config = true },
+	-- { "lewis6991/gitsigns.nvim", config = true },
 	{ "editorconfig/editorconfig-vim" },
 	{ "morhetz/gruvbox" },
 	{ "numToStr/Comment.nvim" },
