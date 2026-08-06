@@ -274,3 +274,6 @@ if ! [[ "${PROMPT_COMMAND:-}" =~ _direnv_hook ]]; then
   PROMPT_COMMAND="_direnv_hook${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
 fi
 
+
+# opencode
+export PATH=/home/av/.opencode/bin:$PATH
