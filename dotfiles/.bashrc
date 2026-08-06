@@ -111,7 +111,7 @@ fi
 ##### EXPORTS ################################################################
 export TERM=xterm-256color
 export NO_AT_BRIDGE=1
-export EDITOR="vim"
+export EDITOR="nvim"
 
 COLOR_YELLOW="\033[33m"
 COLOR_YELLOW_BOLD="\033[33;1m"
